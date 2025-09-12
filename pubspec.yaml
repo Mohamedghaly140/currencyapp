@@ -64,8 +64,6 @@ dev_dependencies:
   retrofit_generator: ^10.0.5 # Code generator for Retrofit
   injectable_generator: ^2.6.2 # Code generator for Injectable
   envied_generator: ^1.2.1 # Environment variables for the app
-  # Testing
-  bloc_test: ^10.0.0 # BLoC testing for Flutter
   mocktail: ^1.0.4 # Mocktail for mocking dependencies
 
 flutter:
