@@ -26,6 +26,8 @@ abstract class CurrencyConverterState with _$CurrencyConverterState {
     @Default(0.0) double exchangeRate,
     // converted amount
     @Default(0.0) double convertedAmount,
+    // entered amount
+    @Default(0.0) double enteredAmount,
     // error message
     @Default(null) String? errorMessage,
   }) = _CurrencyConverterState;

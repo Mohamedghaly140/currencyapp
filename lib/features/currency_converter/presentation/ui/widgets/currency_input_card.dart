@@ -1,3 +1,6 @@
+import 'package:currencyapp/core/dependency_injection/injection.dart';
+import 'package:currencyapp/core/resources/font_manager.dart';
+import 'package:currencyapp/core/resources/styles_manager.dart';
 import 'package:currencyapp/features/currency_converter/presentation/logic/currency_converter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,15 +16,19 @@ class CurrencyInputCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             BlocBuilder<CurrencyConverterCubit, CurrencyConverterState>(
               buildWhen: (previous, current) =>
                   previous.sourceCountry != current.sourceCountry,
               builder: (context, state) {
                 return Text(
-                  'From ${state.sourceCountry?.alpha3 ?? ''}',
-                  style: Theme.of(context).textTheme.titleMedium,
+                  'From ${state.sourceCountry?.currencyId ?? ''}',
+                  textAlign: TextAlign.start,
+                  style: AppTextStyle.getMediumStyle(
+                    fontSize: FontSize.s16,
+                    color: Colors.black87,
+                  ),
                 );
               },
             ),
@@ -42,8 +49,32 @@ class CurrencyInputCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide.none,
                 ),
-                prefixIcon: const Icon(Icons.euro),
+                prefixIconConstraints: BoxConstraints(
+                  minWidth: 0,
+                  minHeight: 0,
+                ),
+                prefixIcon:
+                    BlocBuilder<CurrencyConverterCubit, CurrencyConverterState>(
+                      buildWhen: (previous, current) =>
+                          previous.sourceCountry != current.sourceCountry,
+                      builder: (context, state) {
+                        return Text(
+                          state.sourceCountry?.currencySymbol ?? '',
+                          style: AppTextStyle.getMediumStyle(
+                            fontSize: FontSize.s22,
+                            color: Colors.black87,
+                          ),
+                        );
+                      },
+                    ),
               ),
+              onChanged: (value) {
+                if (value.isNotEmpty) {
+                  getIt<CurrencyConverterCubit>().setEnteredAmount(
+                    double.tryParse(value) ?? 0.0,
+                  );
+                }
+              },
             ),
           ],
         ),

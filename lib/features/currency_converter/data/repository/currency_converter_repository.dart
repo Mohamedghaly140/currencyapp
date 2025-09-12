@@ -18,12 +18,16 @@ class CurrencyConverterRepository implements BaseCurrencyConverterRepository {
     RequestCurrencyConverterDataParams params,
   ) async {
     try {
-      final response = await _baseCurrencyConverterWebService.getCurrencyRate(
-        apiKey: AppConfig.apiKey,
-        q: "${params.currencyId}_PHP,PHP_${params.currencyId}",
-        compact: params.compact,
-      );
-      return ApiResult.success(response);
+      // final response = await _baseCurrencyConverterWebService.getCurrencyRate(
+      //   apiKey: AppConfig.apiKey,
+      //   q: "${params.currencyId}_PHP,PHP_${params.currencyId}",
+      //   compact: params.compact,
+      // );
+      final res = CurrencyConverterResponseModel.fromJson({
+        "USD_EGP": 48.5,
+        "EGP_USD": 0.0206,
+      });
+      return ApiResult.success(res);
     } catch (error) {
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }

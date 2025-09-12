@@ -1,4 +1,9 @@
+import 'package:currencyapp/core/resources/font_manager.dart';
+import 'package:currencyapp/core/resources/styles_manager.dart';
+import 'package:currencyapp/core/utils/extensions/numbers.dart';
+import 'package:currencyapp/features/currency_converter/presentation/logic/currency_converter_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CurrencyResultCard extends StatelessWidget {
   final String targetCurrency;
@@ -21,7 +26,10 @@ class CurrencyResultCard extends StatelessWidget {
           children: [
             Text(
               'To $targetCurrency',
-              style: Theme.of(context).textTheme.titleMedium,
+              style: AppTextStyle.getMediumStyle(
+                fontSize: FontSize.s16,
+                color: Colors.black87,
+              ),
             ),
             const SizedBox(height: 16),
             Container(
@@ -33,12 +41,24 @@ class CurrencyResultCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Icon(Icons.attach_money),
+                  BlocBuilder<CurrencyConverterCubit, CurrencyConverterState>(
+                    buildWhen: (previous, current) =>
+                        previous.targetCountry != current.targetCountry,
+                    builder: (context, state) {
+                      return Text(
+                        state.targetCountry?.currencySymbol ?? '',
+                        style: AppTextStyle.getMediumStyle(
+                          fontSize: FontSize.s22,
+                          color: Colors.black87,
+                        ),
+                      );
+                    },
+                  ),
                   Text(
-                    convertedAmount.toStringAsFixed(2),
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: Colors.blue[900],
-                      fontWeight: FontWeight.bold,
+                    convertedAmount.truncateToDecimals(4).toString(),
+                    style: AppTextStyle.getMediumStyle(
+                      fontSize: FontSize.s22,
+                      color: Colors.blue.shade900,
                     ),
                   ),
                 ],
