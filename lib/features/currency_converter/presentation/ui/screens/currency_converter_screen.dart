@@ -1,4 +1,8 @@
+import 'package:currencyapp/core/resources/values_manager.dart';
+import 'package:currencyapp/features/currency_converter/presentation/logic/currency_converter_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../widgets/currency_input_card.dart';
 import '../widgets/currency_result_card.dart';
 import '../widgets/exchange_rate_info.dart';
@@ -19,8 +23,6 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
 
   // Dummy exchange rate for demonstration
   final double _exchangeRate = 1.08; // Example: EUR to USD
-  final String _sourceCurrency = 'EUR';
-  final String _targetCurrency = 'USD';
 
   @override
   void initState() {
@@ -59,14 +61,11 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Currency Converter'), elevation: 0),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(AppPadding.p16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            CurrencyInputCard(
-              controller: _amountController,
-              sourceCurrency: _sourceCurrency,
-            ),
+            const CurrencyInputCard(),
 
             const SizedBox(height: 16),
 
@@ -74,17 +73,32 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
 
             const SizedBox(height: 16),
 
-            CurrencyResultCard(
-              targetCurrency: _targetCurrency,
-              convertedAmount: _convertedAmount,
+            BlocBuilder<CurrencyConverterCubit, CurrencyConverterState>(
+              buildWhen: (previous, current) =>
+                  previous.convertedAmount != current.convertedAmount ||
+                  previous.targetCountry != current.targetCountry,
+              builder: (context, state) {
+                return CurrencyResultCard(
+                  targetCurrency: state.targetCountry?.alpha3 ?? '',
+                  convertedAmount: state.convertedAmount,
+                );
+              },
             ),
 
             const SizedBox(height: 24),
 
-            ExchangeRateInfo(
-              sourceCurrency: _sourceCurrency,
-              targetCurrency: _targetCurrency,
-              exchangeRate: _exchangeRate,
+            BlocBuilder<CurrencyConverterCubit, CurrencyConverterState>(
+              buildWhen: (previous, current) =>
+                  previous.exchangeRate != current.exchangeRate ||
+                  previous.sourceCountry != current.sourceCountry ||
+                  previous.targetCountry != current.targetCountry,
+              builder: (context, state) {
+                return ExchangeRateInfo(
+                  sourceCurrency: state.sourceCountry?.currencyName ?? '',
+                  targetCurrency: state.targetCountry?.currencyName ?? '',
+                  exchangeRate: state.exchangeRate,
+                );
+              },
             ),
           ],
         ),

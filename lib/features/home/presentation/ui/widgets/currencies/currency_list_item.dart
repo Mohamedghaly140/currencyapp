@@ -1,8 +1,10 @@
+import 'package:currencyapp/core/dependency_injection/injection.dart';
 import 'package:currencyapp/core/navigation/named_routes.dart';
 import 'package:currencyapp/core/resources/font_manager.dart';
 import 'package:currencyapp/core/resources/styles_manager.dart';
 import 'package:currencyapp/core/resources/values_manager.dart';
 import 'package:currencyapp/core/shared/widgets/custom_cached_image.dart';
+import 'package:currencyapp/features/currency_converter/presentation/logic/currency_converter_cubit.dart';
 import 'package:currencyapp/features/home/data/models/country_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -148,6 +150,7 @@ class CurrencyListItem extends StatelessWidget {
 
             ElevatedButton(
               onPressed: () {
+                getIt<CurrencyConverterCubit>().setSourceCountry(country);
                 context.pushNamed(
                   NamedRoutes.currencyConverter.routeName,
                   queryParameters: {'currencyId': country.currencyId},

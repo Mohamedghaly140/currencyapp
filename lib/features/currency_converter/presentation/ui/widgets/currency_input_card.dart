@@ -1,15 +1,10 @@
+import 'package:currencyapp/features/currency_converter/presentation/logic/currency_converter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CurrencyInputCard extends StatelessWidget {
-  final TextEditingController controller;
-  final String sourceCurrency;
-
-  const CurrencyInputCard({
-    super.key,
-    required this.controller,
-    required this.sourceCurrency,
-  });
+  const CurrencyInputCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +15,19 @@ class CurrencyInputCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'From $sourceCurrency',
-              style: Theme.of(context).textTheme.titleMedium,
+            BlocBuilder<CurrencyConverterCubit, CurrencyConverterState>(
+              buildWhen: (previous, current) =>
+                  previous.sourceCountry != current.sourceCountry,
+              builder: (context, state) {
+                return Text(
+                  'From ${state.sourceCountry?.alpha3 ?? ''}',
+                  style: Theme.of(context).textTheme.titleMedium,
+                );
+              },
             ),
             const SizedBox(height: 8),
             TextField(
-              controller: controller,
+              // controller: controller,
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
               ),

@@ -3,6 +3,7 @@ import 'package:currencyapp/core/utils/enums/enums.dart';
 import 'package:currencyapp/features/currency_converter/data/models/currency_converter_response_model.dart';
 import 'package:currencyapp/features/currency_converter/data/models/request_currency_converter_data_params.dart';
 import 'package:currencyapp/features/currency_converter/domain/usecases/get_currency_converter_data_usecase.dart';
+import 'package:currencyapp/features/home/data/models/country_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -16,6 +17,18 @@ class CurrencyConverterCubit extends Cubit<CurrencyConverterState> {
 
   CurrencyConverterCubit(this._getCurrencyConverterDataUsecase)
     : super(const _CurrencyConverterState());
+
+  void setSourceCountry(CountryModel country) {
+    emit(state.copyWith(sourceCountry: country));
+  }
+
+  void setTargetCountry(CountryModel country) {
+    emit(state.copyWith(targetCountry: country));
+  }
+
+  void setExchangeRate(double exchangeRate) {
+    emit(state.copyWith(exchangeRate: exchangeRate));
+  }
 
   Future<void> getCurrencyConverterData({required String currencyId}) async {
     emit(
