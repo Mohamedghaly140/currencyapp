@@ -53,7 +53,6 @@ class CurrencyConverterCubit extends Cubit<CurrencyConverterState> {
         final exchangeRate =
             data.rates["${state.sourceCountry?.currencyId}_${state.targetCountry?.currencyId}"] ??
             0.0;
-        print("exchangeRate: $exchangeRate");
         emit(
           state.copyWith(
             getCurrencyConverterRequestState: RequestState.loaded,
