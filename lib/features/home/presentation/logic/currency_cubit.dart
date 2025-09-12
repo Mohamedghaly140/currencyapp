@@ -51,7 +51,6 @@ class CurrencyCubit extends Cubit<CurrencyState> {
     final result = await getCountriesUseCase.call(NoParams());
     result.when(
       success: (response) {
-        print(response.results.values.toList());
         emit(
           state.copyWith(
             countries: response.results.values.toList(),
