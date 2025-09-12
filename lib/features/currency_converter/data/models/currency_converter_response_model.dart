@@ -4,7 +4,6 @@ class CurrencyConverterResponseModel {
   CurrencyConverterResponseModel({required this.rates});
 
   factory CurrencyConverterResponseModel.fromJson(Map<String, dynamic> json) {
-    print("json: ${json.toString()}");
     final Map<String, double> mapped = {};
     json.forEach((pair, value) {
       mapped[pair] = (value as num).toDouble();

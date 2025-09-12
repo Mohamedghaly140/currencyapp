@@ -54,7 +54,6 @@ class CurrencyConverterCubit extends Cubit<CurrencyConverterState> {
 
     result.when(
       success: (response) {
-        print("response: ${response.rates}");
         final exchangeKey =
             "${state.sourceCountry?.currencyId}_${state.targetCountry.currencyId}";
         final exchangeRate = response.rates[exchangeKey] ?? 0.0;
