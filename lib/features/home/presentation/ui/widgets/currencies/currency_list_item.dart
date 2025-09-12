@@ -121,7 +121,10 @@ class CurrencyListItem extends StatelessWidget {
             // Call to action button with outline style
             OutlinedButton(
               onPressed: () {
-                context.pushNamed(NamedRoutes.historicalData.routeName);
+                context.pushNamed(
+                  NamedRoutes.historicalData.routeName,
+                  queryParameters: {'currencyId': country.currencyId},
+                );
               },
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: Color(0xFF6366F1), width: 1.5),

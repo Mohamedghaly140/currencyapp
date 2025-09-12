@@ -33,9 +33,10 @@ abstract class RouterGenerator {
         path: NamedRoutes.historicalData.routeName,
         name: NamedRoutes.historicalData.routeName,
         builder: (context, state) {
+          final currencyId = state.uri.queryParameters['currencyId'];
           return BlocProvider.value(
             value: getIt<HistoricalDataCubit>(),
-            child: const HistoricalDataScreen(),
+            child: HistoricalDataScreen(currencyId: currencyId),
           );
         },
       ),
