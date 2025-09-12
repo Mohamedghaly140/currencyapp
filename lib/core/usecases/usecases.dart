@@ -14,6 +14,8 @@ abstract class ParametersFuture {
 }
 
 class NoParams extends Equatable {
+  const NoParams();
+
   @override
   List<Object?> get props => [];
 }

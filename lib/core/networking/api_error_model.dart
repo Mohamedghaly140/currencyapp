@@ -7,7 +7,7 @@ class ApiErrorModel {
   @JsonKey(defaultValue: 'Unknown error occurred', name: 'error')
   final String? message;
 
-  ApiErrorModel({this.status, required this.message});
+  const ApiErrorModel({this.status, required this.message});
 
   factory ApiErrorModel.fromJson(Map<String, dynamic> json) =>
       _$ApiErrorModelFromJson(json);
