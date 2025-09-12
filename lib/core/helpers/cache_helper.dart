@@ -1,41 +1,38 @@
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:currencyapp/core/dependency_injection/get_it_instance.dart';
 
-class SecureStorage {
+@injectable
+class CacheHelper {
+  final SharedPreferences _prefs;
+
+  CacheHelper(this._prefs);
   Future<void> set({required String key, required String value}) async {
-    final prefs = sl<SharedPreferences>();
-    await prefs.setString(key, value);
+    await _prefs.setString(key, value);
   }
 
   String? get({required String key}) {
-    final prefs = sl<SharedPreferences>();
-    return prefs.getString(key);
+    return _prefs.getString(key);
   }
 
   bool? getBool({required String key}) {
-    final prefs = sl<SharedPreferences>();
-    return prefs.getBool(key);
+    return _prefs.getBool(key);
   }
 
   Future<void> setBool({required String key, required bool value}) async {
-    final prefs = sl<SharedPreferences>();
-    await prefs.setBool(key, value);
+    await _prefs.setBool(key, value);
   }
 
   //remove key
   Future<void> remove({required String key}) async {
-    final prefs = sl<SharedPreferences>();
-    await prefs.remove(key);
+    await _prefs.remove(key);
   }
 
   //delete all keys
   Future<void> deleteAllKeys() async {
-    final prefs = sl<SharedPreferences>();
-    await prefs.clear();
+    await _prefs.clear();
   }
 
   Future<void> deleteSecureData(String key) async {
-    final prefs = sl<SharedPreferences>();
-    await prefs.remove(key);
+    await _prefs.remove(key);
   }
 }

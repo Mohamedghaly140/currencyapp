@@ -1,0 +1,44 @@
+// dart format width=80
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// **************************************************************************
+// InjectableConfigGenerator
+// **************************************************************************
+
+// ignore_for_file: type=lint
+// coverage:ignore-file
+
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:dio/dio.dart' as _i361;
+import 'package:get_it/get_it.dart' as _i174;
+import 'package:injectable/injectable.dart' as _i526;
+import 'package:shared_preferences/shared_preferences.dart' as _i460;
+
+import '../helpers/cache_helper.dart' as _i52;
+import '../networking/dio_factory.dart' as _i103;
+import 'injectable_module.dart' as _i109;
+
+extension GetItInjectableX on _i174.GetIt {
+  // initializes the registration of main-scope dependencies inside of GetIt
+  Future<_i174.GetIt> init({
+    String? environment,
+    _i526.EnvironmentFilter? environmentFilter,
+  }) async {
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final injectableModule = _$InjectableModule();
+    gh.factory<_i103.DioFactory>(() => _i103.DioFactory());
+    await gh.factoryAsync<_i460.SharedPreferences>(
+      () => injectableModule.prefs,
+      preResolve: true,
+    );
+    gh.factory<_i52.CacheHelper>(
+      () => _i52.CacheHelper(gh<_i460.SharedPreferences>()),
+    );
+    gh.lazySingleton<_i361.Dio>(
+      () => injectableModule.dio(gh<_i103.DioFactory>()),
+    );
+    return this;
+  }
+}
+
+class _$InjectableModule extends _i109.InjectableModule {}

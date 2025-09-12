@@ -1,21 +1,20 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:currencyapp/core/config/app_config.dart';
 import 'package:currencyapp/core/networking/app_interceptors.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+@injectable
 class DioFactory {
-  /// private constructor as I don't want to allow creating an instance of this class
-  DioFactory._();
+  Dio? _dio;
 
-  static Dio? dio;
-
-  static Dio getDio() {
+  Dio getDio() {
     Duration timeOut = const Duration(seconds: 120);
 
-    if (dio == null) {
-      dio = Dio();
-      dio!
+    if (_dio == null) {
+      _dio = Dio();
+      _dio!
         ..options.connectTimeout = timeOut
         ..options.receiveTimeout = timeOut
         ..options.sendTimeout = timeOut
@@ -25,17 +24,17 @@ class DioFactory {
         }
         ..options.receiveDataWhenStatusError = true;
 
-      addDioInterceptor();
-      return dio!;
+      _addDioInterceptor();
+      return _dio!;
     } else {
-      return dio!;
+      return _dio!;
     }
   }
 
-  static void addDioInterceptor() {
-    dio?.interceptors.add(AppIntercepter());
+  void _addDioInterceptor() {
+    _dio?.interceptors.add(AppIntercepter());
     if (kDebugMode) {
-      dio?.interceptors.add(
+      _dio?.interceptors.add(
         PrettyDioLogger(
           requestBody: true,
           requestHeader: true,
