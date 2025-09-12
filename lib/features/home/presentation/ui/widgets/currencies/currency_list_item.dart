@@ -1,9 +1,11 @@
+import 'package:currencyapp/core/navigation/named_routes.dart';
 import 'package:currencyapp/core/resources/font_manager.dart';
 import 'package:currencyapp/core/resources/styles_manager.dart';
 import 'package:currencyapp/core/resources/values_manager.dart';
 import 'package:currencyapp/core/shared/widgets/custom_cached_image.dart';
 import 'package:currencyapp/features/home/data/models/country_model.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CurrencyListItem extends StatelessWidget {
   final CountryModel country;
@@ -119,7 +121,7 @@ class CurrencyListItem extends StatelessWidget {
             // Call to action button with outline style
             OutlinedButton(
               onPressed: () {
-                // TODO: Navigate to historical data screen
+                context.pushNamed(NamedRoutes.historicalData.routeName);
               },
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: Color(0xFF6366F1), width: 1.5),

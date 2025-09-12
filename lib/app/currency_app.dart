@@ -1,14 +1,10 @@
 import 'dart:math';
 
-import 'package:currencyapp/core/dependency_injection/injection.dart';
-import 'package:currencyapp/features/home/presentation/logic/currency_cubit.dart';
-import 'package:currencyapp/features/home/presentation/ui/screens/home_screen.dart';
+import 'package:currencyapp/core/config/app_configuration.dart';
+import 'package:currencyapp/core/navigation/route_generator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:scaled_app/scaled_app.dart';
 import 'package:toastification/toastification.dart';
-import 'package:currencyapp/core/config/app_configuration.dart';
 
 class CurrencyApp extends StatelessWidget {
   const CurrencyApp({super.key});
@@ -17,14 +13,11 @@ class CurrencyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ToastificationWrapper(
       config: AppConfiguration.toastConfig,
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: AppConfiguration.appTitle,
         debugShowCheckedModeBanner: false,
         scaffoldMessengerKey: AppConfiguration.scaffoldMessengerKey,
-        home: BlocProvider(
-          create: (context) => getIt<CurrencyCubit>(),
-          child: HomeScreen(),
-        ),
+        routerConfig: RouterGenerator.router,
         builder: _buildScaledApp,
       ),
     );

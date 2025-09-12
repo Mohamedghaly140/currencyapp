@@ -39,6 +39,9 @@ dependencies:
   json_annotation: ^4.9.0 # Annotations for JSON serialization
   freezed_annotation: ^3.1.0 # Annotations for Freezed
 
+  # Navigation
+  go_router: ^16.2.1 # Go router for navigation
+
   # UI Components & Styling
   flutter_svg: ^2.2.1 # SVG rendering support
   cupertino_icons: ^1.0.8 # iOS-style icons
