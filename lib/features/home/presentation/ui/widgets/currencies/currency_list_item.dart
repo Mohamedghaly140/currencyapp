@@ -145,6 +145,32 @@ class CurrencyListItem extends StatelessWidget {
                 ),
               ),
             ),
+
+            ElevatedButton(
+              onPressed: () {
+                context.pushNamed(
+                  NamedRoutes.currencyConverter.routeName,
+                  queryParameters: {'currencyId': country.currencyId},
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppSize.s8),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p16,
+                  vertical: AppPadding.p12,
+                ),
+                backgroundColor: const Color(0xFF6366F1),
+              ),
+              child: Text(
+                "View Currency Converter",
+                style: AppTextStyle.getMediumStyle(
+                  fontSize: FontSize.s14,
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ],
         ),
       ),
