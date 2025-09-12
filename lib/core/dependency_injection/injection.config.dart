@@ -20,10 +20,8 @@ import '../../features/historical_data/data/repository/historical_data_repositor
     as _i126;
 import '../../features/historical_data/domain/repositories/base_historical_data_repository.dart'
     as _i250;
-import '../../features/historical_data/domain/usecases/get_countries_usecase.dart'
-    as _i259;
-import '../../features/historical_data/domain/usecases/get_currencies_usecase.dart'
-    as _i107;
+import '../../features/historical_data/domain/usecases/get_currency_historical_data_usecase.dart'
+    as _i237;
 import '../../features/historical_data/presentation/logic/historical_data_cubit.dart'
     as _i1027;
 import '../../features/home/data/data_source/remote/currency_web_service.dart'
@@ -55,9 +53,6 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.lazySingleton<_i660.AppDatabase>(() => injectableModule.appDatabase);
-    gh.lazySingleton<_i1027.HistoricalDataCubit>(
-      () => _i1027.HistoricalDataCubit(),
-    );
     gh.factory<_i52.CacheHelper>(
       () => _i52.CacheHelper(gh<_i460.SharedPreferences>()),
     );
@@ -73,6 +68,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i250.BaseHistoricalDataRepository>(
       () => _i126.HistoricalDataRepository(
         gh<_i117.BaseHistoricalDataWebService>(),
+      ),
+    );
+    gh.lazySingleton<_i237.GetCurrencyHistoricalDataUsecase>(
+      () => _i237.GetCurrencyHistoricalDataUsecase(
+        baseHistoricalDataRepository: gh<_i250.BaseHistoricalDataRepository>(),
       ),
     );
     gh.lazySingleton<_i299.BaseCurrencyRepository>(
@@ -91,14 +91,9 @@ extension GetItInjectableX on _i174.GetIt {
         baseCurrencyRepository: gh<_i299.BaseCurrencyRepository>(),
       ),
     );
-    gh.lazySingleton<_i107.GetCurrenciesUseCase>(
-      () => _i107.GetCurrenciesUseCase(
-        baseCurrencyRepository: gh<_i299.BaseCurrencyRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i259.GetCountriesUseCase>(
-      () => _i259.GetCountriesUseCase(
-        baseCurrencyRepository: gh<_i299.BaseCurrencyRepository>(),
+    gh.lazySingleton<_i1027.HistoricalDataCubit>(
+      () => _i1027.HistoricalDataCubit(
+        gh<_i237.GetCurrencyHistoricalDataUsecase>(),
       ),
     );
     gh.lazySingleton<_i532.CurrencyCubit>(

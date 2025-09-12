@@ -19,6 +19,10 @@ class CurrencyApp extends StatelessWidget {
         scaffoldMessengerKey: AppConfiguration.scaffoldMessengerKey,
         routerConfig: RouterGenerator.router,
         builder: _buildScaledApp,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          useMaterial3: true,
+        ),
       ),
     );
   }

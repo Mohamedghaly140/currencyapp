@@ -49,6 +49,7 @@ dependencies:
   scaled_app: ^2.3.0 # Scaled app for responsive designs
   toastification: ^3.0.3 # Toastification for showing toast messages
   cached_network_image: ^3.4.1 # Cached network image for displaying images from the network
+  fl_chart: ^0.71.0 # Beautiful charts for Flutter
 
   envied: ^1.2.1 # Environment variables for the app
 

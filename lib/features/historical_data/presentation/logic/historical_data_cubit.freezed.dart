@@ -15,7 +15,8 @@ T _$identity<T>(T value) => value;
 mixin _$HistoricalDataState {
 
 // get currencies request state
- RequestState get getHistoricalDataRequestState;// error message
+ RequestState get getHistoricalDataRequestState;// historical data
+ HistoricalDataResponseModel? get historicalData;// error message
  String? get errorMessage;
 /// Create a copy of HistoricalDataState
 /// with the given fields replaced by the non-null parameter values.
@@ -27,16 +28,16 @@ $HistoricalDataStateCopyWith<HistoricalDataState> get copyWith => _$HistoricalDa
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HistoricalDataState&&(identical(other.getHistoricalDataRequestState, getHistoricalDataRequestState) || other.getHistoricalDataRequestState == getHistoricalDataRequestState)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HistoricalDataState&&(identical(other.getHistoricalDataRequestState, getHistoricalDataRequestState) || other.getHistoricalDataRequestState == getHistoricalDataRequestState)&&(identical(other.historicalData, historicalData) || other.historicalData == historicalData)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,getHistoricalDataRequestState,errorMessage);
+int get hashCode => Object.hash(runtimeType,getHistoricalDataRequestState,historicalData,errorMessage);
 
 @override
 String toString() {
-  return 'HistoricalDataState(getHistoricalDataRequestState: $getHistoricalDataRequestState, errorMessage: $errorMessage)';
+  return 'HistoricalDataState(getHistoricalDataRequestState: $getHistoricalDataRequestState, historicalData: $historicalData, errorMessage: $errorMessage)';
 }
 
 
@@ -47,7 +48,7 @@ abstract mixin class $HistoricalDataStateCopyWith<$Res>  {
   factory $HistoricalDataStateCopyWith(HistoricalDataState value, $Res Function(HistoricalDataState) _then) = _$HistoricalDataStateCopyWithImpl;
 @useResult
 $Res call({
- RequestState getHistoricalDataRequestState, String? errorMessage
+ RequestState getHistoricalDataRequestState, HistoricalDataResponseModel? historicalData, String? errorMessage
 });
 
 
@@ -64,10 +65,11 @@ class _$HistoricalDataStateCopyWithImpl<$Res>
 
 /// Create a copy of HistoricalDataState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? getHistoricalDataRequestState = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? getHistoricalDataRequestState = null,Object? historicalData = freezed,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 getHistoricalDataRequestState: null == getHistoricalDataRequestState ? _self.getHistoricalDataRequestState : getHistoricalDataRequestState // ignore: cast_nullable_to_non_nullable
-as RequestState,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as RequestState,historicalData: freezed == historicalData ? _self.historicalData : historicalData // ignore: cast_nullable_to_non_nullable
+as HistoricalDataResponseModel?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -153,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( RequestState getHistoricalDataRequestState,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( RequestState getHistoricalDataRequestState,  HistoricalDataResponseModel? historicalData,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HistoricalDataState() when $default != null:
-return $default(_that.getHistoricalDataRequestState,_that.errorMessage);case _:
+return $default(_that.getHistoricalDataRequestState,_that.historicalData,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -174,10 +176,10 @@ return $default(_that.getHistoricalDataRequestState,_that.errorMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( RequestState getHistoricalDataRequestState,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( RequestState getHistoricalDataRequestState,  HistoricalDataResponseModel? historicalData,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _HistoricalDataState():
-return $default(_that.getHistoricalDataRequestState,_that.errorMessage);case _:
+return $default(_that.getHistoricalDataRequestState,_that.historicalData,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +196,10 @@ return $default(_that.getHistoricalDataRequestState,_that.errorMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( RequestState getHistoricalDataRequestState,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( RequestState getHistoricalDataRequestState,  HistoricalDataResponseModel? historicalData,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _HistoricalDataState() when $default != null:
-return $default(_that.getHistoricalDataRequestState,_that.errorMessage);case _:
+return $default(_that.getHistoricalDataRequestState,_that.historicalData,_that.errorMessage);case _:
   return null;
 
 }
@@ -209,11 +211,13 @@ return $default(_that.getHistoricalDataRequestState,_that.errorMessage);case _:
 
 
 class _HistoricalDataState implements HistoricalDataState {
-  const _HistoricalDataState({this.getHistoricalDataRequestState = RequestState.initial, this.errorMessage = null});
+  const _HistoricalDataState({this.getHistoricalDataRequestState = RequestState.initial, this.historicalData = null, this.errorMessage = null});
   
 
 // get currencies request state
 @override@JsonKey() final  RequestState getHistoricalDataRequestState;
+// historical data
+@override@JsonKey() final  HistoricalDataResponseModel? historicalData;
 // error message
 @override@JsonKey() final  String? errorMessage;
 
@@ -227,16 +231,16 @@ _$HistoricalDataStateCopyWith<_HistoricalDataState> get copyWith => __$Historica
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HistoricalDataState&&(identical(other.getHistoricalDataRequestState, getHistoricalDataRequestState) || other.getHistoricalDataRequestState == getHistoricalDataRequestState)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HistoricalDataState&&(identical(other.getHistoricalDataRequestState, getHistoricalDataRequestState) || other.getHistoricalDataRequestState == getHistoricalDataRequestState)&&(identical(other.historicalData, historicalData) || other.historicalData == historicalData)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,getHistoricalDataRequestState,errorMessage);
+int get hashCode => Object.hash(runtimeType,getHistoricalDataRequestState,historicalData,errorMessage);
 
 @override
 String toString() {
-  return 'HistoricalDataState(getHistoricalDataRequestState: $getHistoricalDataRequestState, errorMessage: $errorMessage)';
+  return 'HistoricalDataState(getHistoricalDataRequestState: $getHistoricalDataRequestState, historicalData: $historicalData, errorMessage: $errorMessage)';
 }
 
 
@@ -247,7 +251,7 @@ abstract mixin class _$HistoricalDataStateCopyWith<$Res> implements $HistoricalD
   factory _$HistoricalDataStateCopyWith(_HistoricalDataState value, $Res Function(_HistoricalDataState) _then) = __$HistoricalDataStateCopyWithImpl;
 @override @useResult
 $Res call({
- RequestState getHistoricalDataRequestState, String? errorMessage
+ RequestState getHistoricalDataRequestState, HistoricalDataResponseModel? historicalData, String? errorMessage
 });
 
 
@@ -264,10 +268,11 @@ class __$HistoricalDataStateCopyWithImpl<$Res>
 
 /// Create a copy of HistoricalDataState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? getHistoricalDataRequestState = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? getHistoricalDataRequestState = null,Object? historicalData = freezed,Object? errorMessage = freezed,}) {
   return _then(_HistoricalDataState(
 getHistoricalDataRequestState: null == getHistoricalDataRequestState ? _self.getHistoricalDataRequestState : getHistoricalDataRequestState // ignore: cast_nullable_to_non_nullable
-as RequestState,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as RequestState,historicalData: freezed == historicalData ? _self.historicalData : historicalData // ignore: cast_nullable_to_non_nullable
+as HistoricalDataResponseModel?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

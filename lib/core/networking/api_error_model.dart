@@ -3,28 +3,11 @@ part 'api_error_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class ApiErrorModel {
-  final int? statusCode;
-  @JsonKey(defaultValue: 'Unknown error occurred')
-  final String message;
-  final String? errorCode;
-  final dynamic data;
-  final String? status;
-  final String? path;
-  final String? timestamp;
-  final String? stack;
-  final String? error;
+  final int? status;
+  @JsonKey(defaultValue: 'Unknown error occurred', name: 'error')
+  final String? message;
 
-  ApiErrorModel({
-    this.statusCode,
-    required this.message,
-    this.errorCode,
-    this.data,
-    this.status,
-    this.path,
-    this.timestamp,
-    this.stack,
-    this.error,
-  });
+  ApiErrorModel({this.status, required this.message});
 
   factory ApiErrorModel.fromJson(Map<String, dynamic> json) =>
       _$ApiErrorModelFromJson(json);

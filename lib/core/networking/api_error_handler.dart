@@ -45,8 +45,6 @@ class ApiErrorHandler {
       log('Data Parsing Error: ${error.toString()}', name: 'ApiErrorHandler');
       return ApiErrorModel(
         message: 'We are having trouble displaying some information',
-        errorCode: 'PARSING_ERROR',
-        data: [error.toString()],
       );
     } else if (error is TypeError) {
       log('Model Parsing Error: ${error.toString()}', name: 'ApiErrorHandler');
@@ -54,8 +52,6 @@ class ApiErrorHandler {
       if (error.toString().contains('is not a subtype of')) {
         return ApiErrorModel(
           message: 'We are having trouble displaying some information',
-          errorCode: 'PARSING_ERROR',
-          data: [error.toString()],
         );
       }
       return ApiErrorModel(message: 'Invalid data format');
