@@ -46,22 +46,23 @@ class CurrencyConverterCubit extends Cubit<CurrencyConverterState> {
     );
 
     final params = RequestCurrencyConverterDataParams(
-      targetCurrencyId: currencyId,
-      sourceCurrencyId: state.sourceCountry?.currencyId ?? '',
+      sourceCurrencyId: currencyId,
+      targetCurrencyId: state.targetCountry.currencyId ?? '',
     );
 
     final result = await _getCurrencyConverterDataUsecase.call(params);
 
     result.when(
-      success: (data) {
-        final exchangeRate =
-            data.rates["${state.sourceCountry?.currencyId}_${state.targetCountry?.currencyId}"] ??
-            0.0;
+      success: (response) {
+        print("response: ${response.rates}");
+        final exchangeKey =
+            "${state.sourceCountry?.currencyId}_${state.targetCountry.currencyId}";
+        final exchangeRate = response.rates[exchangeKey] ?? 0.0;
         DebugHelper.printOnlyInDebug("exchangeRate: $exchangeRate");
         emit(
           state.copyWith(
             getCurrencyConverterRequestState: RequestState.loaded,
-            currencyConverterData: data,
+            currencyConverterData: response,
             exchangeRate: exchangeRate,
             errorMessage: null,
           ),

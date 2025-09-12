@@ -18,7 +18,7 @@ mixin _$CurrencyConverterState {
  RequestState get getCurrencyConverterRequestState;// currency converter data
  CurrencyConverterResponseModel? get currencyConverterData;// source currency
  CountryModel? get sourceCountry;// target country
- CountryModel? get targetCountry;// exchange rate
+ CountryModel get targetCountry;// exchange rate
  double get exchangeRate;// converted amount
  double get convertedAmount;// entered amount
  double get enteredAmount;// error message
@@ -53,7 +53,7 @@ abstract mixin class $CurrencyConverterStateCopyWith<$Res>  {
   factory $CurrencyConverterStateCopyWith(CurrencyConverterState value, $Res Function(CurrencyConverterState) _then) = _$CurrencyConverterStateCopyWithImpl;
 @useResult
 $Res call({
- RequestState getCurrencyConverterRequestState, CurrencyConverterResponseModel? currencyConverterData, CountryModel? sourceCountry, CountryModel? targetCountry, double exchangeRate, double convertedAmount, double enteredAmount, String? errorMessage
+ RequestState getCurrencyConverterRequestState, CurrencyConverterResponseModel? currencyConverterData, CountryModel? sourceCountry, CountryModel targetCountry, double exchangeRate, double convertedAmount, double enteredAmount, String? errorMessage
 });
 
 
@@ -70,13 +70,13 @@ class _$CurrencyConverterStateCopyWithImpl<$Res>
 
 /// Create a copy of CurrencyConverterState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? getCurrencyConverterRequestState = null,Object? currencyConverterData = freezed,Object? sourceCountry = freezed,Object? targetCountry = freezed,Object? exchangeRate = null,Object? convertedAmount = null,Object? enteredAmount = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? getCurrencyConverterRequestState = null,Object? currencyConverterData = freezed,Object? sourceCountry = freezed,Object? targetCountry = null,Object? exchangeRate = null,Object? convertedAmount = null,Object? enteredAmount = null,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 getCurrencyConverterRequestState: null == getCurrencyConverterRequestState ? _self.getCurrencyConverterRequestState : getCurrencyConverterRequestState // ignore: cast_nullable_to_non_nullable
 as RequestState,currencyConverterData: freezed == currencyConverterData ? _self.currencyConverterData : currencyConverterData // ignore: cast_nullable_to_non_nullable
 as CurrencyConverterResponseModel?,sourceCountry: freezed == sourceCountry ? _self.sourceCountry : sourceCountry // ignore: cast_nullable_to_non_nullable
-as CountryModel?,targetCountry: freezed == targetCountry ? _self.targetCountry : targetCountry // ignore: cast_nullable_to_non_nullable
-as CountryModel?,exchangeRate: null == exchangeRate ? _self.exchangeRate : exchangeRate // ignore: cast_nullable_to_non_nullable
+as CountryModel?,targetCountry: null == targetCountry ? _self.targetCountry : targetCountry // ignore: cast_nullable_to_non_nullable
+as CountryModel,exchangeRate: null == exchangeRate ? _self.exchangeRate : exchangeRate // ignore: cast_nullable_to_non_nullable
 as double,convertedAmount: null == convertedAmount ? _self.convertedAmount : convertedAmount // ignore: cast_nullable_to_non_nullable
 as double,enteredAmount: null == enteredAmount ? _self.enteredAmount : enteredAmount // ignore: cast_nullable_to_non_nullable
 as double,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -165,7 +165,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( RequestState getCurrencyConverterRequestState,  CurrencyConverterResponseModel? currencyConverterData,  CountryModel? sourceCountry,  CountryModel? targetCountry,  double exchangeRate,  double convertedAmount,  double enteredAmount,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( RequestState getCurrencyConverterRequestState,  CurrencyConverterResponseModel? currencyConverterData,  CountryModel? sourceCountry,  CountryModel targetCountry,  double exchangeRate,  double convertedAmount,  double enteredAmount,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CurrencyConverterState() when $default != null:
 return $default(_that.getCurrencyConverterRequestState,_that.currencyConverterData,_that.sourceCountry,_that.targetCountry,_that.exchangeRate,_that.convertedAmount,_that.enteredAmount,_that.errorMessage);case _:
@@ -186,7 +186,7 @@ return $default(_that.getCurrencyConverterRequestState,_that.currencyConverterDa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( RequestState getCurrencyConverterRequestState,  CurrencyConverterResponseModel? currencyConverterData,  CountryModel? sourceCountry,  CountryModel? targetCountry,  double exchangeRate,  double convertedAmount,  double enteredAmount,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( RequestState getCurrencyConverterRequestState,  CurrencyConverterResponseModel? currencyConverterData,  CountryModel? sourceCountry,  CountryModel targetCountry,  double exchangeRate,  double convertedAmount,  double enteredAmount,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _CurrencyConverterState():
 return $default(_that.getCurrencyConverterRequestState,_that.currencyConverterData,_that.sourceCountry,_that.targetCountry,_that.exchangeRate,_that.convertedAmount,_that.enteredAmount,_that.errorMessage);case _:
@@ -206,7 +206,7 @@ return $default(_that.getCurrencyConverterRequestState,_that.currencyConverterDa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( RequestState getCurrencyConverterRequestState,  CurrencyConverterResponseModel? currencyConverterData,  CountryModel? sourceCountry,  CountryModel? targetCountry,  double exchangeRate,  double convertedAmount,  double enteredAmount,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( RequestState getCurrencyConverterRequestState,  CurrencyConverterResponseModel? currencyConverterData,  CountryModel? sourceCountry,  CountryModel targetCountry,  double exchangeRate,  double convertedAmount,  double enteredAmount,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _CurrencyConverterState() when $default != null:
 return $default(_that.getCurrencyConverterRequestState,_that.currencyConverterData,_that.sourceCountry,_that.targetCountry,_that.exchangeRate,_that.convertedAmount,_that.enteredAmount,_that.errorMessage);case _:
@@ -231,7 +231,7 @@ class _CurrencyConverterState implements CurrencyConverterState {
 // source currency
 @override@JsonKey() final  CountryModel? sourceCountry;
 // target country
-@override@JsonKey() final  CountryModel? targetCountry;
+@override@JsonKey() final  CountryModel targetCountry;
 // exchange rate
 @override@JsonKey() final  double exchangeRate;
 // converted amount
@@ -271,7 +271,7 @@ abstract mixin class _$CurrencyConverterStateCopyWith<$Res> implements $Currency
   factory _$CurrencyConverterStateCopyWith(_CurrencyConverterState value, $Res Function(_CurrencyConverterState) _then) = __$CurrencyConverterStateCopyWithImpl;
 @override @useResult
 $Res call({
- RequestState getCurrencyConverterRequestState, CurrencyConverterResponseModel? currencyConverterData, CountryModel? sourceCountry, CountryModel? targetCountry, double exchangeRate, double convertedAmount, double enteredAmount, String? errorMessage
+ RequestState getCurrencyConverterRequestState, CurrencyConverterResponseModel? currencyConverterData, CountryModel? sourceCountry, CountryModel targetCountry, double exchangeRate, double convertedAmount, double enteredAmount, String? errorMessage
 });
 
 
@@ -288,13 +288,13 @@ class __$CurrencyConverterStateCopyWithImpl<$Res>
 
 /// Create a copy of CurrencyConverterState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? getCurrencyConverterRequestState = null,Object? currencyConverterData = freezed,Object? sourceCountry = freezed,Object? targetCountry = freezed,Object? exchangeRate = null,Object? convertedAmount = null,Object? enteredAmount = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? getCurrencyConverterRequestState = null,Object? currencyConverterData = freezed,Object? sourceCountry = freezed,Object? targetCountry = null,Object? exchangeRate = null,Object? convertedAmount = null,Object? enteredAmount = null,Object? errorMessage = freezed,}) {
   return _then(_CurrencyConverterState(
 getCurrencyConverterRequestState: null == getCurrencyConverterRequestState ? _self.getCurrencyConverterRequestState : getCurrencyConverterRequestState // ignore: cast_nullable_to_non_nullable
 as RequestState,currencyConverterData: freezed == currencyConverterData ? _self.currencyConverterData : currencyConverterData // ignore: cast_nullable_to_non_nullable
 as CurrencyConverterResponseModel?,sourceCountry: freezed == sourceCountry ? _self.sourceCountry : sourceCountry // ignore: cast_nullable_to_non_nullable
-as CountryModel?,targetCountry: freezed == targetCountry ? _self.targetCountry : targetCountry // ignore: cast_nullable_to_non_nullable
-as CountryModel?,exchangeRate: null == exchangeRate ? _self.exchangeRate : exchangeRate // ignore: cast_nullable_to_non_nullable
+as CountryModel?,targetCountry: null == targetCountry ? _self.targetCountry : targetCountry // ignore: cast_nullable_to_non_nullable
+as CountryModel,exchangeRate: null == exchangeRate ? _self.exchangeRate : exchangeRate // ignore: cast_nullable_to_non_nullable
 as double,convertedAmount: null == convertedAmount ? _self.convertedAmount : convertedAmount // ignore: cast_nullable_to_non_nullable
 as double,enteredAmount: null == enteredAmount ? _self.enteredAmount : enteredAmount // ignore: cast_nullable_to_non_nullable
 as double,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable

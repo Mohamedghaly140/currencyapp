@@ -1,4 +1,5 @@
 import 'package:currencyapp/core/config/app_config.dart';
+import 'package:currencyapp/core/helpers/debug_helper.dart';
 import 'package:currencyapp/core/networking/api_error_handler.dart';
 import 'package:currencyapp/core/networking/api_result.dart';
 import 'package:currencyapp/features/currency_converter/data/data_source/remote/currency_converter_web_service.dart';
@@ -18,16 +19,18 @@ class CurrencyConverterRepository implements BaseCurrencyConverterRepository {
     RequestCurrencyConverterDataParams params,
   ) async {
     try {
-      await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 1));
       // final response = await _baseCurrencyConverterWebService.getCurrencyRate(
       //   apiKey: AppConfig.apiKey,
-      //   q: "${params.currencyId}_PHP,PHP_${params.currencyId}",
+      //   q: "${params.targetCurrencyId}_${params.sourceCurrencyId},${params.sourceCurrencyId}_${params.targetCurrencyId}",
       //   compact: params.compact,
       // );
+      // For testing only to reduce the number of requests
       final res = CurrencyConverterResponseModel.fromJson({
-        "USD_EGP": 48.5,
-        "EGP_USD": 0.0206,
+        "${params.targetCurrencyId}_${params.sourceCurrencyId}": 48.5,
+        "${params.sourceCurrencyId}_${params.targetCurrencyId}": 0.0206,
       });
+      DebugHelper.printOnlyInDebug("res: ${res.toJson()}");
       return ApiResult.success(res);
     } catch (error) {
       return ApiResult.failure(ApiErrorHandler.handle(error));

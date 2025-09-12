@@ -21,7 +21,7 @@ abstract class CurrencyConverterState with _$CurrencyConverterState {
         name: "United States of America",
       ),
     )
-    CountryModel? targetCountry,
+    CountryModel targetCountry,
     // exchange rate
     @Default(0.0) double exchangeRate,
     // converted amount

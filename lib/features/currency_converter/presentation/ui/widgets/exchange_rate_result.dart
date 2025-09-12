@@ -20,7 +20,7 @@ class ExchangeRateResult extends StatelessWidget {
               previous.targetCountry != current.targetCountry,
           builder: (context, state) {
             return CurrencyResultCard(
-              targetCurrency: state.targetCountry?.alpha3 ?? '',
+              targetCurrency: state.targetCountry.alpha3 ?? '',
               convertedAmount: state.convertedAmount,
             );
           },
@@ -34,7 +34,7 @@ class ExchangeRateResult extends StatelessWidget {
           builder: (context, state) {
             return ExchangeRateInfo(
               sourceCurrency: state.sourceCountry?.currencyName ?? '',
-              targetCurrency: state.targetCountry?.currencyName ?? '',
+              targetCurrency: state.targetCountry.currencyName ?? '',
               exchangeRate: state.exchangeRate,
             );
           },

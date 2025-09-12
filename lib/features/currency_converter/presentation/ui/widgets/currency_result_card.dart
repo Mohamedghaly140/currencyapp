@@ -46,7 +46,7 @@ class CurrencyResultCard extends StatelessWidget {
                         previous.targetCountry != current.targetCountry,
                     builder: (context, state) {
                       return Text(
-                        state.targetCountry?.currencySymbol ?? '',
+                        state.targetCountry.currencySymbol ?? '',
                         style: AppTextStyle.getMediumStyle(
                           fontSize: FontSize.s22,
                           color: Colors.black87,
