@@ -73,4 +73,8 @@ class CurrencyConverterCubit extends Cubit<CurrencyConverterState> {
       },
     );
   }
+
+  void clearCubitState() {
+    emit(const _CurrencyConverterState());
+  }
 }

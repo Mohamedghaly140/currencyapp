@@ -16,18 +16,20 @@ class CurrencyConverterScreen extends StatefulWidget {
 }
 
 class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
+  late CurrencyConverterCubit cubit;
+
   @override
   void initState() {
     super.initState();
+    cubit = getIt<CurrencyConverterCubit>();
     if (widget.currencyId != null) {
-      getIt<CurrencyConverterCubit>().getCurrencyConverterData(
-        currencyId: widget.currencyId!,
-      );
+      cubit.getCurrencyConverterData(currencyId: widget.currencyId!);
     }
   }
 
   @override
   void dispose() {
+    cubit.clearCubitState();
     super.dispose();
   }
 
