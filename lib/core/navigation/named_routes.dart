@@ -1,7 +1,9 @@
 enum NamedRoutes {
   home('/home'),
 
-  historicalData('/historical-data');
+  historicalData('/historical-data'),
+
+  currencyConverter('/currency-converter');
 
   final String routeName;
 

@@ -1,6 +1,8 @@
 import 'package:currencyapp/core/dependency_injection/injection.dart';
 import 'package:currencyapp/core/navigation/named_routes.dart';
 import 'package:currencyapp/core/navigation/route_observer.dart';
+import 'package:currencyapp/features/currency_converter/presentation/logic/currency_converter_cubit.dart';
+import 'package:currencyapp/features/currency_converter/presentation/ui/screens/currency_converter_screen.dart';
 import 'package:currencyapp/features/historical_data/presentation/logic/historical_data_cubit.dart';
 import 'package:currencyapp/features/historical_data/presentation/ui/screens/historical_data_screen.dart';
 import 'package:currencyapp/features/home/presentation/logic/currency_cubit.dart';
@@ -37,6 +39,17 @@ abstract class RouterGenerator {
           return BlocProvider.value(
             value: getIt<HistoricalDataCubit>(),
             child: HistoricalDataScreen(currencyId: currencyId),
+          );
+        },
+      ),
+      GoRoute(
+        path: NamedRoutes.currencyConverter.routeName,
+        name: NamedRoutes.currencyConverter.routeName,
+        builder: (context, state) {
+          final currencyId = state.uri.queryParameters['currencyId'];
+          return BlocProvider.value(
+            value: getIt<CurrencyConverterCubit>(),
+            child: CurrencyConverterScreen(currencyId: currencyId),
           );
         },
       ),
