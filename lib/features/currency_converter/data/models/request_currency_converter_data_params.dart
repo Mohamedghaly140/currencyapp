@@ -7,7 +7,8 @@ part 'request_currency_converter_data_params.g.dart';
 abstract class RequestCurrencyConverterDataParams
     with _$RequestCurrencyConverterDataParams {
   const factory RequestCurrencyConverterDataParams({
-    required String currencyId,
+    required String targetCurrencyId,
+    required String sourceCurrencyId,
     @Default('ultra') String compact,
   }) = _RequestCurrencyConverterDataParams;
 

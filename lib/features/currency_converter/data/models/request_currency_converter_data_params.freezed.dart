@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RequestCurrencyConverterDataParams {
 
- String get currencyId; String get compact;
+ String get targetCurrencyId; String get sourceCurrencyId; String get compact;
 /// Create a copy of RequestCurrencyConverterDataParams
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $RequestCurrencyConverterDataParamsCopyWith<RequestCurrencyConverterDataParams> 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestCurrencyConverterDataParams&&(identical(other.currencyId, currencyId) || other.currencyId == currencyId)&&(identical(other.compact, compact) || other.compact == compact));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RequestCurrencyConverterDataParams&&(identical(other.targetCurrencyId, targetCurrencyId) || other.targetCurrencyId == targetCurrencyId)&&(identical(other.sourceCurrencyId, sourceCurrencyId) || other.sourceCurrencyId == sourceCurrencyId)&&(identical(other.compact, compact) || other.compact == compact));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,currencyId,compact);
+int get hashCode => Object.hash(runtimeType,targetCurrencyId,sourceCurrencyId,compact);
 
 @override
 String toString() {
-  return 'RequestCurrencyConverterDataParams(currencyId: $currencyId, compact: $compact)';
+  return 'RequestCurrencyConverterDataParams(targetCurrencyId: $targetCurrencyId, sourceCurrencyId: $sourceCurrencyId, compact: $compact)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $RequestCurrencyConverterDataParamsCopyWith<$Res>  {
   factory $RequestCurrencyConverterDataParamsCopyWith(RequestCurrencyConverterDataParams value, $Res Function(RequestCurrencyConverterDataParams) _then) = _$RequestCurrencyConverterDataParamsCopyWithImpl;
 @useResult
 $Res call({
- String currencyId, String compact
+ String targetCurrencyId, String sourceCurrencyId, String compact
 });
 
 
@@ -65,9 +65,10 @@ class _$RequestCurrencyConverterDataParamsCopyWithImpl<$Res>
 
 /// Create a copy of RequestCurrencyConverterDataParams
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? currencyId = null,Object? compact = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? targetCurrencyId = null,Object? sourceCurrencyId = null,Object? compact = null,}) {
   return _then(_self.copyWith(
-currencyId: null == currencyId ? _self.currencyId : currencyId // ignore: cast_nullable_to_non_nullable
+targetCurrencyId: null == targetCurrencyId ? _self.targetCurrencyId : targetCurrencyId // ignore: cast_nullable_to_non_nullable
+as String,sourceCurrencyId: null == sourceCurrencyId ? _self.sourceCurrencyId : sourceCurrencyId // ignore: cast_nullable_to_non_nullable
 as String,compact: null == compact ? _self.compact : compact // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -154,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String currencyId,  String compact)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String targetCurrencyId,  String sourceCurrencyId,  String compact)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RequestCurrencyConverterDataParams() when $default != null:
-return $default(_that.currencyId,_that.compact);case _:
+return $default(_that.targetCurrencyId,_that.sourceCurrencyId,_that.compact);case _:
   return orElse();
 
 }
@@ -175,10 +176,10 @@ return $default(_that.currencyId,_that.compact);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String currencyId,  String compact)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String targetCurrencyId,  String sourceCurrencyId,  String compact)  $default,) {final _that = this;
 switch (_that) {
 case _RequestCurrencyConverterDataParams():
-return $default(_that.currencyId,_that.compact);case _:
+return $default(_that.targetCurrencyId,_that.sourceCurrencyId,_that.compact);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +196,10 @@ return $default(_that.currencyId,_that.compact);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String currencyId,  String compact)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String targetCurrencyId,  String sourceCurrencyId,  String compact)?  $default,) {final _that = this;
 switch (_that) {
 case _RequestCurrencyConverterDataParams() when $default != null:
-return $default(_that.currencyId,_that.compact);case _:
+return $default(_that.targetCurrencyId,_that.sourceCurrencyId,_that.compact);case _:
   return null;
 
 }
@@ -210,10 +211,11 @@ return $default(_that.currencyId,_that.compact);case _:
 @JsonSerializable()
 
 class _RequestCurrencyConverterDataParams implements RequestCurrencyConverterDataParams {
-  const _RequestCurrencyConverterDataParams({required this.currencyId, this.compact = 'ultra'});
+  const _RequestCurrencyConverterDataParams({required this.targetCurrencyId, required this.sourceCurrencyId, this.compact = 'ultra'});
   factory _RequestCurrencyConverterDataParams.fromJson(Map<String, dynamic> json) => _$RequestCurrencyConverterDataParamsFromJson(json);
 
-@override final  String currencyId;
+@override final  String targetCurrencyId;
+@override final  String sourceCurrencyId;
 @override@JsonKey() final  String compact;
 
 /// Create a copy of RequestCurrencyConverterDataParams
@@ -229,16 +231,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RequestCurrencyConverterDataParams&&(identical(other.currencyId, currencyId) || other.currencyId == currencyId)&&(identical(other.compact, compact) || other.compact == compact));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RequestCurrencyConverterDataParams&&(identical(other.targetCurrencyId, targetCurrencyId) || other.targetCurrencyId == targetCurrencyId)&&(identical(other.sourceCurrencyId, sourceCurrencyId) || other.sourceCurrencyId == sourceCurrencyId)&&(identical(other.compact, compact) || other.compact == compact));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,currencyId,compact);
+int get hashCode => Object.hash(runtimeType,targetCurrencyId,sourceCurrencyId,compact);
 
 @override
 String toString() {
-  return 'RequestCurrencyConverterDataParams(currencyId: $currencyId, compact: $compact)';
+  return 'RequestCurrencyConverterDataParams(targetCurrencyId: $targetCurrencyId, sourceCurrencyId: $sourceCurrencyId, compact: $compact)';
 }
 
 
@@ -249,7 +251,7 @@ abstract mixin class _$RequestCurrencyConverterDataParamsCopyWith<$Res> implemen
   factory _$RequestCurrencyConverterDataParamsCopyWith(_RequestCurrencyConverterDataParams value, $Res Function(_RequestCurrencyConverterDataParams) _then) = __$RequestCurrencyConverterDataParamsCopyWithImpl;
 @override @useResult
 $Res call({
- String currencyId, String compact
+ String targetCurrencyId, String sourceCurrencyId, String compact
 });
 
 
@@ -266,9 +268,10 @@ class __$RequestCurrencyConverterDataParamsCopyWithImpl<$Res>
 
 /// Create a copy of RequestCurrencyConverterDataParams
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? currencyId = null,Object? compact = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? targetCurrencyId = null,Object? sourceCurrencyId = null,Object? compact = null,}) {
   return _then(_RequestCurrencyConverterDataParams(
-currencyId: null == currencyId ? _self.currencyId : currencyId // ignore: cast_nullable_to_non_nullable
+targetCurrencyId: null == targetCurrencyId ? _self.targetCurrencyId : targetCurrencyId // ignore: cast_nullable_to_non_nullable
+as String,sourceCurrencyId: null == sourceCurrencyId ? _self.sourceCurrencyId : sourceCurrencyId // ignore: cast_nullable_to_non_nullable
 as String,compact: null == compact ? _self.compact : compact // ignore: cast_nullable_to_non_nullable
 as String,
   ));

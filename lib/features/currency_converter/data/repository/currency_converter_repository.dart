@@ -18,6 +18,7 @@ class CurrencyConverterRepository implements BaseCurrencyConverterRepository {
     RequestCurrencyConverterDataParams params,
   ) async {
     try {
+      await Future.delayed(const Duration(seconds: 3));
       // final response = await _baseCurrencyConverterWebService.getCurrencyRate(
       //   apiKey: AppConfig.apiKey,
       //   q: "${params.currencyId}_PHP,PHP_${params.currencyId}",

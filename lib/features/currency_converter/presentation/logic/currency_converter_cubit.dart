@@ -1,3 +1,4 @@
+import 'package:currencyapp/core/helpers/debug_helper.dart';
 import 'package:currencyapp/core/networking/api_result.dart';
 import 'package:currencyapp/core/utils/enums/enums.dart';
 import 'package:currencyapp/features/currency_converter/data/models/currency_converter_response_model.dart';
@@ -44,7 +45,10 @@ class CurrencyConverterCubit extends Cubit<CurrencyConverterState> {
       state.copyWith(getCurrencyConverterRequestState: RequestState.loading),
     );
 
-    final params = RequestCurrencyConverterDataParams(currencyId: currencyId);
+    final params = RequestCurrencyConverterDataParams(
+      targetCurrencyId: currencyId,
+      sourceCurrencyId: state.sourceCountry?.currencyId ?? '',
+    );
 
     final result = await _getCurrencyConverterDataUsecase.call(params);
 
@@ -53,6 +57,7 @@ class CurrencyConverterCubit extends Cubit<CurrencyConverterState> {
         final exchangeRate =
             data.rates["${state.sourceCountry?.currencyId}_${state.targetCountry?.currencyId}"] ??
             0.0;
+        DebugHelper.printOnlyInDebug("exchangeRate: $exchangeRate");
         emit(
           state.copyWith(
             getCurrencyConverterRequestState: RequestState.loaded,

@@ -9,13 +9,15 @@ part of 'request_currency_converter_data_params.dart';
 _RequestCurrencyConverterDataParams
 _$RequestCurrencyConverterDataParamsFromJson(Map<String, dynamic> json) =>
     _RequestCurrencyConverterDataParams(
-      currencyId: json['currencyId'] as String,
+      targetCurrencyId: json['targetCurrencyId'] as String,
+      sourceCurrencyId: json['sourceCurrencyId'] as String,
       compact: json['compact'] as String? ?? 'ultra',
     );
 
 Map<String, dynamic> _$RequestCurrencyConverterDataParamsToJson(
   _RequestCurrencyConverterDataParams instance,
 ) => <String, dynamic>{
-  'currencyId': instance.currencyId,
+  'targetCurrencyId': instance.targetCurrencyId,
+  'sourceCurrencyId': instance.sourceCurrencyId,
   'compact': instance.compact,
 };
