@@ -73,6 +73,37 @@ class _CurrencyWebService implements CurrencyWebService {
     return _value;
   }
 
+  @override
+  Future<void> getLatestRates({
+    required String apiKey,
+    required String q,
+    required String compact,
+    required String date,
+    required String endDate,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'apiKey': apiKey,
+      r'q': q,
+      r'compact': compact,
+      r'date': date,
+      r'endDate': endDate,
+    };
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<void>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/v8/convert',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

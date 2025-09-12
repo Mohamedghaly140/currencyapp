@@ -15,6 +15,14 @@ abstract class BaseCurrencyWebService {
   Future<CountriesResponseModel> getCountries({
     @Query('apiKey') required String apiKey,
   });
+
+  Future<void> getLatestRates({
+    @Query('apiKey') required String apiKey,
+    @Query('q') required String q,
+    @Query('compact') required String compact,
+    @Query('date') required String date,
+    @Query('endDate') required String endDate,
+  });
 }
 
 @LazySingleton(as: BaseCurrencyWebService)
@@ -33,5 +41,15 @@ abstract class CurrencyWebService implements BaseCurrencyWebService {
   @GET(EndPoints.countries)
   Future<CountriesResponseModel> getCountries({
     @Query('apiKey') required String apiKey,
+  });
+
+  @override
+  @GET(EndPoints.convert)
+  Future<void> getLatestRates({
+    @Query('apiKey') required String apiKey,
+    @Query('q') required String q,
+    @Query('compact') required String compact,
+    @Query('date') required String date,
+    @Query('endDate') required String endDate,
   });
 }
