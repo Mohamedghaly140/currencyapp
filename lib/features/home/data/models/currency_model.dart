@@ -9,17 +9,11 @@ class CurrencyModel {
   final String name;
   @JsonKey(name: 'currencySymbol')
   final String? symbol;
-  final String? countryCode;
-
-  String get flagUrl => countryCode != null
-      ? "https://flagcdn.com/w20/${countryCode?.toLowerCase()}.png"
-      : "";
 
   const CurrencyModel({
     required this.id,
     required this.name,
     required this.symbol,
-    required this.countryCode,
   });
 
   factory CurrencyModel.fromJson(Map<String, dynamic> json) =>
