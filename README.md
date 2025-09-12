@@ -261,7 +261,17 @@ test/
 ### Run Tests:
 
 ```bash
+# Run all tests
 flutter test
+
+# Run with coverage
+flutter test --coverage
+
+# Run specific test
+flutter test test/features/home/presentation/logic/currency_cubit_test.dart
+
+# Run test runner
+flutter test test/test_runner.dart
 ```
 
 ## 📦 Key Dependencies
