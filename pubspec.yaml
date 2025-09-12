@@ -44,6 +44,8 @@ dependencies:
   toastification: ^3.0.3 # Toastification for showing toast messages
   cached_network_image: ^3.4.1 # Cached network image for displaying images from the network
 
+  envied: ^1.2.1 # Environment variables for the app
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -53,6 +55,7 @@ dev_dependencies:
   json_serializable: ^6.11.1 # JSON serialization code generator
   retrofit_generator: ^10.0.5 # Code generator for Retrofit
   injectable_generator: ^2.6.2 # Code generator for Injectable
+  envied_generator: ^1.2.1 # Environment variables for the app
 
 flutter:
   uses-material-design: true
