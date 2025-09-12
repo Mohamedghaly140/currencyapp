@@ -1,3 +1,4 @@
+import 'package:currencyapp/core/database/database.dart';
 import 'package:currencyapp/core/networking/dio_factory.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -10,4 +11,7 @@ abstract class InjectableModule {
 
   @lazySingleton
   Dio dio(DioFactory dioFactory) => dioFactory.getDio();
+
+  @lazySingleton
+  AppDatabase get appDatabase => AppDatabase();
 }

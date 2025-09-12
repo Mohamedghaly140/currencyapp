@@ -25,3 +25,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+// List of supported currencies with their country’s flag. Store the data locally in a database
+// after the first API request & load the data from it for future usage.

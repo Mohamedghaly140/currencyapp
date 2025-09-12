@@ -24,6 +24,7 @@ import '../../features/home/domain/usecases/get_countries_usecase.dart'
 import '../../features/home/domain/usecases/get_currencies_usecase.dart'
     as _i935;
 import '../../features/home/presentation/logic/currency_cubit.dart' as _i532;
+import '../database/database.dart' as _i660;
 import '../helpers/cache_helper.dart' as _i52;
 import '../networking/dio_factory.dart' as _i103;
 import 'injectable_module.dart' as _i109;
@@ -41,6 +42,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => injectableModule.prefs,
       preResolve: true,
     );
+    gh.lazySingleton<_i660.AppDatabase>(() => injectableModule.appDatabase);
     gh.factory<_i52.CacheHelper>(
       () => _i52.CacheHelper(gh<_i460.SharedPreferences>()),
     );
@@ -51,7 +53,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i591.CurrencyWebService.new(gh<_i361.Dio>()),
     );
     gh.lazySingleton<_i299.BaseCurrencyRepository>(
-      () => _i492.CurrencyRepository(gh<_i591.BaseCurrencyWebService>()),
+      () => _i492.CurrencyRepository(
+        gh<_i591.BaseCurrencyWebService>(),
+        gh<_i660.AppDatabase>(),
+      ),
     );
     gh.lazySingleton<_i935.GetCurrenciesUseCase>(
       () => _i935.GetCurrenciesUseCase(
