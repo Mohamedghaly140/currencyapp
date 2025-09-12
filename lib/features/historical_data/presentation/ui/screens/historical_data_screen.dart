@@ -1,3 +1,4 @@
+import 'package:currencyapp/features/historical_data/presentation/ui/widgets/empty_historical_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:currencyapp/core/dependency_injection/injection.dart';
@@ -265,7 +266,7 @@ class _HistoricalDataScreenState extends State<HistoricalDataScreen>
   }
 
   Widget _buildChartsTab(HistoricalDataState state) {
-    final data = state.historicalData!;
+    final data = state.historicalData ?? EmptyHistoricalData.data;
     final currencyPairs = data.rates.keys.toList();
 
     return SingleChildScrollView(
@@ -309,7 +310,7 @@ class _HistoricalDataScreenState extends State<HistoricalDataScreen>
   }
 
   Widget _buildDetailsTab(HistoricalDataState state) {
-    final data = state.historicalData!;
+    final data = state.historicalData ?? EmptyHistoricalData.data;
     final currencyPairs = data.rates.keys.toList();
 
     return SingleChildScrollView(

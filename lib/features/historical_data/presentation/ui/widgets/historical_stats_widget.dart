@@ -35,20 +35,7 @@ class HistoricalStatsWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(Icons.analytics_outlined, color: accentColor, size: 20),
-              const SizedBox(width: 8),
-              Text(
-                'Statistics - $currencyPair',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-              ),
-            ],
-          ),
+          _StatsHeader(accentColor: accentColor, currencyPair: currencyPair),
           const SizedBox(height: 16),
           Row(
             children: [
@@ -94,53 +81,11 @@ class HistoricalStatsWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: _getVariabilityColor(
-                stats.volatility,
-              ).withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: _getVariabilityColor(
-                  stats.volatility,
-                ).withValues(alpha: 0.3),
-                width: 1,
-              ),
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  _getVariabilityIcon(stats.volatility),
-                  color: _getVariabilityColor(stats.volatility),
-                  size: 18,
-                ),
-                const SizedBox(width: 8),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Volatility: ${(stats.volatility * 100).toStringAsFixed(2)}%',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: _getVariabilityColor(stats.volatility),
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      _getVariabilityDescription(stats.volatility),
-                      style: TextStyle(
-                        color: _getVariabilityColor(
-                          stats.volatility,
-                        ).withValues(alpha: 0.8),
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          _VolatilityBanner(
+            volatility: stats.volatility,
+            color: _getVariabilityColor(stats.volatility),
+            icon: _getVariabilityIcon(stats.volatility),
+            description: _getVariabilityDescription(stats.volatility),
           ),
         ],
       ),
@@ -189,6 +134,84 @@ class HistoricalStatsWidget extends StatelessWidget {
     if (volatility < 0.02) return 'Low volatility - Stable rate';
     if (volatility < 0.05) return 'Moderate volatility - Some fluctuation';
     return 'High volatility - Significant fluctuation';
+  }
+}
+
+class _StatsHeader extends StatelessWidget {
+  final Color accentColor;
+  final String currencyPair;
+
+  const _StatsHeader({required this.accentColor, required this.currencyPair});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(Icons.analytics_outlined, color: accentColor, size: 20),
+        const SizedBox(width: 8),
+        Text(
+          'Statistics - $currencyPair',
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _VolatilityBanner extends StatelessWidget {
+  final double volatility;
+  final Color color;
+  final IconData icon;
+  final String description;
+
+  const _VolatilityBanner({
+    required this.volatility,
+    required this.color,
+    required this.icon,
+    required this.description,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, color: color, size: 18),
+          const SizedBox(width: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Volatility: ${(volatility * 100).toStringAsFixed(2)}%',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: color,
+                  fontSize: 14,
+                ),
+              ),
+              Text(
+                description,
+                style: TextStyle(
+                  color: color.withValues(alpha: 0.8),
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
 

@@ -38,82 +38,13 @@ class HistoricalDataListWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: [
-                Icon(Icons.timeline, color: accentColor, size: 20),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    'Historical Data - $currencyPair',
-                    style: AppTextStyle.getBoldStyle(
-                      fontSize: FontSize.s16,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: accentColor.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    '${sortedEntries.length} entries',
-                    style: AppTextStyle.getMediumStyle(
-                      fontSize: FontSize.s12,
-                      color: accentColor,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          _ListHeader(
+            accentColor: accentColor,
+            currencyPair: currencyPair,
+            count: sortedEntries.length,
           ),
           const Divider(height: 1),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            color: Colors.grey.withValues(alpha: 0.05),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    'Date',
-                    style: AppTextStyle.getSemiBoldStyle(
-                      fontSize: FontSize.s12,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    'Rate',
-                    style: AppTextStyle.getSemiBoldStyle(
-                      fontSize: FontSize.s12,
-                      color: Colors.grey,
-                    ),
-                    textAlign: TextAlign.right,
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Text(
-                    'Change',
-                    style: AppTextStyle.getSemiBoldStyle(
-                      fontSize: FontSize.s12,
-                      color: Colors.grey,
-                    ),
-                    textAlign: TextAlign.right,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          const _ListTableHeader(),
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -143,63 +74,181 @@ class HistoricalDataListWidget extends StatelessWidget {
                 }
               }
 
-              return Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-                child: Row(
-                  spacing: AppSpacing.md,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            DateFormat('MMM dd, yyyy').format(date),
-                            style: AppTextStyle.getMediumStyle(
-                              fontSize: FontSize.s14,
-                            ),
-                          ),
-                          Text(
-                            DateFormat('EEEE').format(date),
-                            style: AppTextStyle.getRegularStyle(
-                              fontSize: FontSize.s12,
-                              color: Colors.grey.shade600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Text(
-                      rate.toStringAsFixed(6),
-                      style: AppTextStyle.getSemiBoldStyle(
-                        fontSize: FontSize.s16,
-                        color: Colors.black87,
-                      ),
-                      textAlign: TextAlign.right,
-                    ),
-                    changePercentage != null
-                        ? Row(
-                            spacing: 2,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Icon(changeIcon, color: changeColor, size: 16),
-                              Text(
-                                '${changePercentage.toStringAsFixed(2)}%',
-                                style: AppTextStyle.getMediumStyle(
-                                  fontSize: FontSize.s12,
-                                  color: changeColor,
-                                ),
-                              ),
-                            ],
-                          )
-                        : const SizedBox(),
-                  ],
-                ),
+              return _HistoricalListItem(
+                date: date,
+                rate: rate,
+                changePercentage: changePercentage,
+                changeColor: changeColor,
+                changeIcon: changeIcon,
               );
             },
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ListHeader extends StatelessWidget {
+  final Color accentColor;
+  final String currencyPair;
+  final int count;
+
+  const _ListHeader({
+    required this.accentColor,
+    required this.currencyPair,
+    required this.count,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Icon(Icons.timeline, color: accentColor, size: 20),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              'Historical Data - $currencyPair',
+              style: AppTextStyle.getBoldStyle(
+                fontSize: FontSize.s16,
+                color: Colors.black87,
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: accentColor.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              '$count entries',
+              style: AppTextStyle.getMediumStyle(
+                fontSize: FontSize.s12,
+                color: accentColor,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ListTableHeader extends StatelessWidget {
+  const _ListTableHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      color: Colors.grey.withValues(alpha: 0.05),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 2,
+            child: Text(
+              'Date',
+              style: AppTextStyle.getSemiBoldStyle(
+                fontSize: FontSize.s12,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Text(
+              'Rate',
+              style: AppTextStyle.getSemiBoldStyle(
+                fontSize: FontSize.s12,
+                color: Colors.grey,
+              ),
+              textAlign: TextAlign.right,
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Text(
+              'Change',
+              style: AppTextStyle.getSemiBoldStyle(
+                fontSize: FontSize.s12,
+                color: Colors.grey,
+              ),
+              textAlign: TextAlign.right,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _HistoricalListItem extends StatelessWidget {
+  final DateTime date;
+  final double rate;
+  final double? changePercentage;
+  final Color changeColor;
+  final IconData changeIcon;
+
+  const _HistoricalListItem({
+    required this.date,
+    required this.rate,
+    required this.changePercentage,
+    required this.changeColor,
+    required this.changeIcon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: Row(
+        spacing: AppSpacing.md,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  DateFormat('MMM dd, yyyy').format(date),
+                  style: AppTextStyle.getMediumStyle(fontSize: FontSize.s14),
+                ),
+                Text(
+                  DateFormat('EEEE').format(date),
+                  style: AppTextStyle.getRegularStyle(
+                    fontSize: FontSize.s12,
+                    color: Colors.grey.shade600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Text(
+            rate.toStringAsFixed(6),
+            style: AppTextStyle.getSemiBoldStyle(
+              fontSize: FontSize.s16,
+              color: Colors.black87,
+            ),
+            textAlign: TextAlign.right,
+          ),
+          changePercentage != null
+              ? Row(
+                  spacing: 2,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(changeIcon, color: changeColor, size: 16),
+                    Text(
+                      '${changePercentage!.toStringAsFixed(2)}%',
+                      style: AppTextStyle.getMediumStyle(
+                        fontSize: FontSize.s12,
+                        color: changeColor,
+                      ),
+                    ),
+                  ],
+                )
+              : const SizedBox(),
         ],
       ),
     );
