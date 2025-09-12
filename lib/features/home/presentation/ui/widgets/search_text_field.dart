@@ -34,6 +34,9 @@ class SearchTextField extends StatelessWidget {
             },
           ),
         ),
+        onTapOutside: (event) {
+          FocusScope.of(context).unfocus();
+        },
       ),
     );
   }
