@@ -12,7 +12,7 @@ class CountryModel {
   final String? name;
 
   String get flagUrl =>
-      id != null ? "https://flagcdn.com/w20/${id?.toLowerCase()}.png" : "";
+      id != null ? "https://flagcdn.com/w80/${id?.toLowerCase()}.png" : "";
 
   const CountryModel({
     this.alpha3,
