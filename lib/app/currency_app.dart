@@ -1,6 +1,10 @@
 import 'dart:math';
 
+import 'package:currencyapp/core/dependency_injection/injection.dart';
+import 'package:currencyapp/features/home/presentation/logic/currency_cubit.dart';
+import 'package:currencyapp/features/home/presentation/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:scaled_app/scaled_app.dart';
 import 'package:toastification/toastification.dart';
@@ -17,9 +21,9 @@ class CurrencyApp extends StatelessWidget {
         title: AppConfiguration.appTitle,
         debugShowCheckedModeBanner: false,
         scaffoldMessengerKey: AppConfiguration.scaffoldMessengerKey,
-        home: Scaffold(
-          appBar: AppBar(title: Text(AppConfiguration.appTitle)),
-          body: Center(child: Text('Currency App')),
+        home: BlocProvider(
+          create: (context) => getIt<CurrencyCubit>(),
+          child: HomeScreen(),
         ),
         builder: _buildScaledApp,
       ),

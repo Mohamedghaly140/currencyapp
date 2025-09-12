@@ -1,7 +1,7 @@
+import 'package:currencyapp/core/networking/dio_factory.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:currencyapp/core/networking/dio_factory.dart';
 
 @module
 abstract class InjectableModule {
