@@ -138,7 +138,7 @@ class CurrencyListItem extends StatelessWidget {
                 backgroundColor: Colors.transparent,
               ),
               child: Text(
-                "View Historical Data Last 7 Days",
+                "View Historical Data Last 7 Days vs USD",
                 style: AppTextStyle.getMediumStyle(
                   fontSize: FontSize.s14,
                   color: const Color(0xFF6366F1),

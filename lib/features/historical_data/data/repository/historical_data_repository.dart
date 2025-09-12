@@ -36,7 +36,7 @@ class HistoricalDataRepository implements BaseHistoricalDataRepository {
     try {
       final response = await _baseHistoricalDataWebService.getHistoricalData(
         apiKey: AppConfig.apiKey,
-        q: "${params.currencyId}_PHP,PHP_${params.currencyId}",
+        q: "${params.currencyId}_USD,USD_${params.currencyId}",
         compact: params.compact,
         date: params.date.toYYYYMMDD(),
         endDate: params.endDate.toYYYYMMDD(),
