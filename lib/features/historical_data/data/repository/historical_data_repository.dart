@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:currencyapp/core/config/app_config.dart';
+import 'package:currencyapp/core/dependency_injection/injection.dart';
+import 'package:currencyapp/core/helpers/cache_helper.dart';
 import 'package:currencyapp/core/networking/api_error_handler.dart';
 import 'package:currencyapp/core/networking/api_result.dart';
+import 'package:currencyapp/core/resources/app_strings.dart';
 import 'package:currencyapp/core/utils/extensions/date.dart';
 import 'package:currencyapp/features/historical_data/data/data_source/remote/historical_data_web_service.dart';
 import 'package:currencyapp/features/historical_data/data/models/historical_data_response_model.dart';
@@ -18,6 +23,14 @@ class HistoricalDataRepository implements BaseHistoricalDataRepository {
   Future<ApiResult<HistoricalDataResponseModel>> getHistoricalData(
     RequestCurrencyHistoricalDataParams params,
   ) async {
+    final cachedData = getIt<CacheHelper>().get(
+      key: "${AppStrings.historicalData}_${params.currencyId}",
+    );
+    if (cachedData != null) {
+      return ApiResult.success(
+        HistoricalDataResponseModel.fromJson(jsonDecode(cachedData)),
+      );
+    }
     try {
       final response = await _baseHistoricalDataWebService.getHistoricalData(
         apiKey: AppConfig.apiKey,
@@ -25,6 +38,10 @@ class HistoricalDataRepository implements BaseHistoricalDataRepository {
         compact: params.compact,
         date: params.date.toYYYYMMDD(),
         endDate: params.endDate.toYYYYMMDD(),
+      );
+      getIt<CacheHelper>().set(
+        key: "${AppStrings.historicalData}_${params.currencyId}",
+        value: jsonEncode(response.toJson()),
       );
       return ApiResult.success(response);
     } catch (error) {

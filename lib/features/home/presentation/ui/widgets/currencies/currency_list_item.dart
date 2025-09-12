@@ -29,86 +29,117 @@ class CurrencyListItem extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(AppPadding.p16),
-        child: Row(
-          spacing: AppSpacing.lg,
+        child: Column(
+          spacing: AppSpacing.md,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Flag container with rounded corners
-            Container(
-              width: AppSize.s36,
-              height: AppSize.s36,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.grey.withValues(alpha: 0.2),
-                  width: 0.5,
+            // Top row with flag, info, and currency symbol
+            Row(
+              spacing: AppSpacing.lg,
+              children: [
+                // Flag container with rounded corners
+                Container(
+                  width: AppSize.s36,
+                  height: AppSize.s36,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.grey.withValues(alpha: 0.2),
+                      width: 0.5,
+                    ),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: CustomCachedImage(
+                    mediaUrl: country.flagUrl,
+                    width: AppSize.s36,
+                    height: AppSize.s36,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: CustomCachedImage(
-                mediaUrl: country.flagUrl,
-                width: AppSize.s36,
-                height: AppSize.s36,
-                fit: BoxFit.cover,
-              ),
-            ),
 
-            // Country and currency info
-            Expanded(
-              child: Column(
-                spacing: AppSpacing.xs,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    country.name ?? 'Unknown Country',
-                    style: AppTextStyle.getMediumStyle(
-                      fontSize: FontSize.s16,
-                      color: const Color(0xFF1A1A1A),
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                // Country and currency info
+                Expanded(
+                  child: Column(
+                    spacing: AppSpacing.xs,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        country.name ?? 'Unknown Country',
+                        style: AppTextStyle.getMediumStyle(
+                          fontSize: FontSize.s16,
+                          color: const Color(0xFF1A1A1A),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        country.currencyName ?? 'Unknown Currency',
+                        style: AppTextStyle.getRegularStyle(
+                          fontSize: FontSize.s14,
+                          color: const Color(0xFF666666),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      if (country.currencyId != null)
+                        Text(
+                          country.currencyId!,
+                          style: AppTextStyle.getRegularStyle(
+                            fontSize: FontSize.s12,
+                            color: const Color(0xFF999999),
+                          ),
+                        ),
+                    ],
                   ),
-                  Text(
-                    country.currencyName ?? 'Unknown Currency',
-                    style: AppTextStyle.getRegularStyle(
-                      fontSize: FontSize.s14,
-                      color: const Color(0xFF666666),
+                ),
+
+                // Currency symbol with background
+                if (country.currencySymbol != null &&
+                    country.currencySymbol!.isNotEmpty)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppPadding.p12,
+                      vertical: AppPadding.p8,
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  if (country.currencyId != null) ...[
-                    Text(
-                      country.currencyId!,
-                      style: AppTextStyle.getRegularStyle(
-                        fontSize: FontSize.s12,
-                        color: const Color(0xFF999999),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF6366F1).withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(AppSize.s8),
+                    ),
+                    child: Text(
+                      country.currencySymbol!,
+                      style: AppTextStyle.getSemiBoldStyle(
+                        fontSize: FontSize.s16,
+                        color: const Color(0xFF6366F1),
                       ),
                     ),
-                  ],
-                ],
-              ),
+                  ),
+              ],
             ),
 
-            // Currency symbol with background
-            if (country.currencySymbol != null &&
-                country.currencySymbol!.isNotEmpty)
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppPadding.p12,
-                  vertical: AppPadding.p8,
-                ),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF6366F1).withValues(alpha: 0.1),
+            // Call to action button with outline style
+            OutlinedButton(
+              onPressed: () {
+                // TODO: Navigate to historical data screen
+              },
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: Color(0xFF6366F1), width: 1.5),
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppSize.s8),
                 ),
-                child: Text(
-                  country.currencySymbol!,
-                  style: AppTextStyle.getSemiBoldStyle(
-                    fontSize: FontSize.s16,
-                    color: const Color(0xFF6366F1),
-                  ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p16,
+                  vertical: AppPadding.p12,
+                ),
+                backgroundColor: Colors.transparent,
+              ),
+              child: Text(
+                "View Historical Data Last 7 Days",
+                style: AppTextStyle.getMediumStyle(
+                  fontSize: FontSize.s14,
+                  color: const Color(0xFF6366F1),
                 ),
               ),
+            ),
           ],
         ),
       ),
