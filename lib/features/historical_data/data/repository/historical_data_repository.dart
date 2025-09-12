@@ -23,8 +23,10 @@ class HistoricalDataRepository implements BaseHistoricalDataRepository {
   Future<ApiResult<HistoricalDataResponseModel>> getHistoricalData(
     RequestCurrencyHistoricalDataParams params,
   ) async {
+    // check if the data is cached
     final cachedData = getIt<CacheHelper>().get(
-      key: "${AppStrings.historicalData}_${params.currencyId}",
+      key:
+          "${AppStrings.historicalData}_${params.currencyId}_${params.date.toYYYYMMDD()}_${params.endDate.toYYYYMMDD()}",
     );
     if (cachedData != null) {
       return ApiResult.success(
@@ -39,8 +41,10 @@ class HistoricalDataRepository implements BaseHistoricalDataRepository {
         date: params.date.toYYYYMMDD(),
         endDate: params.endDate.toYYYYMMDD(),
       );
+      // cache the data
       getIt<CacheHelper>().set(
-        key: "${AppStrings.historicalData}_${params.currencyId}",
+        key:
+            "${AppStrings.historicalData}_${params.currencyId}_${params.date.toYYYYMMDD()}_${params.endDate.toYYYYMMDD()}",
         value: jsonEncode(response.toJson()),
       );
       return ApiResult.success(response);

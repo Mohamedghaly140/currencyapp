@@ -71,7 +71,8 @@ class _HistoricalDataScreenState extends State<HistoricalDataScreen>
 
     if (picked != null) {
       // Validate that the selected range is exactly 7 days
-      final daysDifference = picked.end.difference(picked.start).inDays;
+      // Add 1 to include both start and end dates in the count
+      final daysDifference = picked.end.difference(picked.start).inDays + 1;
 
       if (daysDifference != 7) {
         // Show error message if range is not exactly 7 days
@@ -79,9 +80,7 @@ class _HistoricalDataScreenState extends State<HistoricalDataScreen>
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                daysDifference < 7
-                    ? 'Date range must be exactly 7 days. You selected $daysDifference days.'
-                    : 'Date range must be exactly 7 days. You selected $daysDifference days.',
+                'Date range must be exactly 7 days. You selected $daysDifference days.',
               ),
               backgroundColor: Colors.red,
               duration: const Duration(seconds: 3),
