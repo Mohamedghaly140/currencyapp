@@ -11,6 +11,8 @@ abstract class CurrencyState with _$CurrencyState {
     @Default([]) List<CurrencyModel> currencies,
     // countries
     @Default([]) List<CountryModel> countries,
+    // search text
+    @Default('') String searchQuery,
     // error message
     @Default(null) String? errorMessage,
   }) = _CurrencyState;

@@ -31,7 +31,7 @@ class Currencies extends StatelessWidget {
                 await getIt<CurrencyCubit>().getCountries();
               },
               child: CurrenciesList(
-                countries: state.countries,
+                countries: getIt<CurrencyCubit>().filteredCountries,
                 isLoading: isLoading,
               ),
             ),
