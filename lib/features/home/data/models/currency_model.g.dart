@@ -10,8 +10,8 @@ CurrencyModel _$CurrencyModelFromJson(Map<String, dynamic> json) =>
     CurrencyModel(
       id: json['id'] as String,
       name: json['currencyName'] as String,
-      symbol: json['currencySymbol'] as String,
-      code: json['code'] as String,
+      symbol: json['currencySymbol'] as String?,
+      countryCode: json['countryCode'] as String?,
     );
 
 Map<String, dynamic> _$CurrencyModelToJson(CurrencyModel instance) =>
@@ -19,5 +19,5 @@ Map<String, dynamic> _$CurrencyModelToJson(CurrencyModel instance) =>
       'id': instance.id,
       'currencyName': instance.name,
       'currencySymbol': instance.symbol,
-      'code': instance.code,
+      'countryCode': instance.countryCode,
     };

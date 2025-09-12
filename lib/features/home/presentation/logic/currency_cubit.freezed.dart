@@ -15,8 +15,10 @@ T _$identity<T>(T value) => value;
 mixin _$CurrencyState {
 
 // get currencies request state
- RequestState get getCurrencyRequestState;// currencies
- List<CurrencyModel> get currencies;// error message
+ RequestState get getCurrencyRequestState;// get countries request state
+ RequestState get getCountryRequestState;// currencies
+ List<CurrencyModel> get currencies;// countries
+ List<CountryModel> get countries;// error message
  String? get errorMessage;
 /// Create a copy of CurrencyState
 /// with the given fields replaced by the non-null parameter values.
@@ -28,16 +30,16 @@ $CurrencyStateCopyWith<CurrencyState> get copyWith => _$CurrencyStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CurrencyState&&(identical(other.getCurrencyRequestState, getCurrencyRequestState) || other.getCurrencyRequestState == getCurrencyRequestState)&&const DeepCollectionEquality().equals(other.currencies, currencies)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CurrencyState&&(identical(other.getCurrencyRequestState, getCurrencyRequestState) || other.getCurrencyRequestState == getCurrencyRequestState)&&(identical(other.getCountryRequestState, getCountryRequestState) || other.getCountryRequestState == getCountryRequestState)&&const DeepCollectionEquality().equals(other.currencies, currencies)&&const DeepCollectionEquality().equals(other.countries, countries)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,getCurrencyRequestState,const DeepCollectionEquality().hash(currencies),errorMessage);
+int get hashCode => Object.hash(runtimeType,getCurrencyRequestState,getCountryRequestState,const DeepCollectionEquality().hash(currencies),const DeepCollectionEquality().hash(countries),errorMessage);
 
 @override
 String toString() {
-  return 'CurrencyState(getCurrencyRequestState: $getCurrencyRequestState, currencies: $currencies, errorMessage: $errorMessage)';
+  return 'CurrencyState(getCurrencyRequestState: $getCurrencyRequestState, getCountryRequestState: $getCountryRequestState, currencies: $currencies, countries: $countries, errorMessage: $errorMessage)';
 }
 
 
@@ -48,7 +50,7 @@ abstract mixin class $CurrencyStateCopyWith<$Res>  {
   factory $CurrencyStateCopyWith(CurrencyState value, $Res Function(CurrencyState) _then) = _$CurrencyStateCopyWithImpl;
 @useResult
 $Res call({
- RequestState getCurrencyRequestState, List<CurrencyModel> currencies, String? errorMessage
+ RequestState getCurrencyRequestState, RequestState getCountryRequestState, List<CurrencyModel> currencies, List<CountryModel> countries, String? errorMessage
 });
 
 
@@ -65,11 +67,13 @@ class _$CurrencyStateCopyWithImpl<$Res>
 
 /// Create a copy of CurrencyState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? getCurrencyRequestState = null,Object? currencies = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? getCurrencyRequestState = null,Object? getCountryRequestState = null,Object? currencies = null,Object? countries = null,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 getCurrencyRequestState: null == getCurrencyRequestState ? _self.getCurrencyRequestState : getCurrencyRequestState // ignore: cast_nullable_to_non_nullable
+as RequestState,getCountryRequestState: null == getCountryRequestState ? _self.getCountryRequestState : getCountryRequestState // ignore: cast_nullable_to_non_nullable
 as RequestState,currencies: null == currencies ? _self.currencies : currencies // ignore: cast_nullable_to_non_nullable
-as List<CurrencyModel>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as List<CurrencyModel>,countries: null == countries ? _self.countries : countries // ignore: cast_nullable_to_non_nullable
+as List<CountryModel>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -155,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( RequestState getCurrencyRequestState,  List<CurrencyModel> currencies,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( RequestState getCurrencyRequestState,  RequestState getCountryRequestState,  List<CurrencyModel> currencies,  List<CountryModel> countries,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CurrencyState() when $default != null:
-return $default(_that.getCurrencyRequestState,_that.currencies,_that.errorMessage);case _:
+return $default(_that.getCurrencyRequestState,_that.getCountryRequestState,_that.currencies,_that.countries,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -176,10 +180,10 @@ return $default(_that.getCurrencyRequestState,_that.currencies,_that.errorMessag
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( RequestState getCurrencyRequestState,  List<CurrencyModel> currencies,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( RequestState getCurrencyRequestState,  RequestState getCountryRequestState,  List<CurrencyModel> currencies,  List<CountryModel> countries,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _CurrencyState():
-return $default(_that.getCurrencyRequestState,_that.currencies,_that.errorMessage);case _:
+return $default(_that.getCurrencyRequestState,_that.getCountryRequestState,_that.currencies,_that.countries,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +200,10 @@ return $default(_that.getCurrencyRequestState,_that.currencies,_that.errorMessag
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( RequestState getCurrencyRequestState,  List<CurrencyModel> currencies,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( RequestState getCurrencyRequestState,  RequestState getCountryRequestState,  List<CurrencyModel> currencies,  List<CountryModel> countries,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _CurrencyState() when $default != null:
-return $default(_that.getCurrencyRequestState,_that.currencies,_that.errorMessage);case _:
+return $default(_that.getCurrencyRequestState,_that.getCountryRequestState,_that.currencies,_that.countries,_that.errorMessage);case _:
   return null;
 
 }
@@ -211,11 +215,13 @@ return $default(_that.getCurrencyRequestState,_that.currencies,_that.errorMessag
 
 
 class _CurrencyState implements CurrencyState {
-  const _CurrencyState({this.getCurrencyRequestState = RequestState.initial, final  List<CurrencyModel> currencies = const [], this.errorMessage = null}): _currencies = currencies;
+  const _CurrencyState({this.getCurrencyRequestState = RequestState.initial, this.getCountryRequestState = RequestState.initial, final  List<CurrencyModel> currencies = const [], final  List<CountryModel> countries = const [], this.errorMessage = null}): _currencies = currencies,_countries = countries;
   
 
 // get currencies request state
 @override@JsonKey() final  RequestState getCurrencyRequestState;
+// get countries request state
+@override@JsonKey() final  RequestState getCountryRequestState;
 // currencies
  final  List<CurrencyModel> _currencies;
 // currencies
@@ -223,6 +229,15 @@ class _CurrencyState implements CurrencyState {
   if (_currencies is EqualUnmodifiableListView) return _currencies;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_currencies);
+}
+
+// countries
+ final  List<CountryModel> _countries;
+// countries
+@override@JsonKey() List<CountryModel> get countries {
+  if (_countries is EqualUnmodifiableListView) return _countries;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_countries);
 }
 
 // error message
@@ -238,16 +253,16 @@ _$CurrencyStateCopyWith<_CurrencyState> get copyWith => __$CurrencyStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CurrencyState&&(identical(other.getCurrencyRequestState, getCurrencyRequestState) || other.getCurrencyRequestState == getCurrencyRequestState)&&const DeepCollectionEquality().equals(other._currencies, _currencies)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CurrencyState&&(identical(other.getCurrencyRequestState, getCurrencyRequestState) || other.getCurrencyRequestState == getCurrencyRequestState)&&(identical(other.getCountryRequestState, getCountryRequestState) || other.getCountryRequestState == getCountryRequestState)&&const DeepCollectionEquality().equals(other._currencies, _currencies)&&const DeepCollectionEquality().equals(other._countries, _countries)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,getCurrencyRequestState,const DeepCollectionEquality().hash(_currencies),errorMessage);
+int get hashCode => Object.hash(runtimeType,getCurrencyRequestState,getCountryRequestState,const DeepCollectionEquality().hash(_currencies),const DeepCollectionEquality().hash(_countries),errorMessage);
 
 @override
 String toString() {
-  return 'CurrencyState(getCurrencyRequestState: $getCurrencyRequestState, currencies: $currencies, errorMessage: $errorMessage)';
+  return 'CurrencyState(getCurrencyRequestState: $getCurrencyRequestState, getCountryRequestState: $getCountryRequestState, currencies: $currencies, countries: $countries, errorMessage: $errorMessage)';
 }
 
 
@@ -258,7 +273,7 @@ abstract mixin class _$CurrencyStateCopyWith<$Res> implements $CurrencyStateCopy
   factory _$CurrencyStateCopyWith(_CurrencyState value, $Res Function(_CurrencyState) _then) = __$CurrencyStateCopyWithImpl;
 @override @useResult
 $Res call({
- RequestState getCurrencyRequestState, List<CurrencyModel> currencies, String? errorMessage
+ RequestState getCurrencyRequestState, RequestState getCountryRequestState, List<CurrencyModel> currencies, List<CountryModel> countries, String? errorMessage
 });
 
 
@@ -275,11 +290,13 @@ class __$CurrencyStateCopyWithImpl<$Res>
 
 /// Create a copy of CurrencyState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? getCurrencyRequestState = null,Object? currencies = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? getCurrencyRequestState = null,Object? getCountryRequestState = null,Object? currencies = null,Object? countries = null,Object? errorMessage = freezed,}) {
   return _then(_CurrencyState(
 getCurrencyRequestState: null == getCurrencyRequestState ? _self.getCurrencyRequestState : getCurrencyRequestState // ignore: cast_nullable_to_non_nullable
+as RequestState,getCountryRequestState: null == getCountryRequestState ? _self.getCountryRequestState : getCountryRequestState // ignore: cast_nullable_to_non_nullable
 as RequestState,currencies: null == currencies ? _self._currencies : currencies // ignore: cast_nullable_to_non_nullable
-as List<CurrencyModel>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as List<CurrencyModel>,countries: null == countries ? _self._countries : countries // ignore: cast_nullable_to_non_nullable
+as List<CountryModel>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

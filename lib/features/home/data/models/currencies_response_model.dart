@@ -1,22 +1,16 @@
-import 'package:currencyapp/core/helpers/debug_helper.dart';
 import 'package:currencyapp/features/home/data/models/currency_model.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'currencies_response_model.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class CurrencyResponseModel {
-  final List<CurrencyModel> currencies;
+  final Map<String, CurrencyModel> results;
 
-  CurrencyResponseModel({required this.currencies});
+  CurrencyResponseModel({required this.results});
 
-  factory CurrencyResponseModel.fromJson(Map<String, dynamic> json) {
-    final results = json['results'] as Map<String, dynamic>;
-    DebugHelper.log('results: $results');
-    final currencies = results.values
-        .map((e) => CurrencyModel.fromJson(e as Map<String, dynamic>))
-        .toList();
+  factory CurrencyResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$CurrencyResponseModelFromJson(json);
 
-    return CurrencyResponseModel(currencies: currencies);
-  }
-
-  Map<String, dynamic> toJson() => {
-    'results': currencies.map((e) => e.toJson()).toList(),
-  };
+  Map<String, dynamic> toJson() => _$CurrencyResponseModelToJson(this);
 }
