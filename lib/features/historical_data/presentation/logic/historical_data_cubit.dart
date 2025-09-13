@@ -26,7 +26,7 @@ class HistoricalDataCubit extends Cubit<HistoricalDataState> {
 
     final params = RequestCurrencyHistoricalDataParams(
       currencyId: currencyId,
-      date: startDate ?? DateTime.now().subtract(const Duration(days: 7)),
+      date: startDate ?? DateTime.now().subtract(const Duration(days: 6)),
       endDate: endDate ?? DateTime.now(),
     );
 

@@ -23,7 +23,7 @@ class _HistoricalDataScreenState extends State<HistoricalDataScreen>
     with TickerProviderStateMixin {
   late final HistoricalDataCubit _cubit;
   late final TabController _tabController;
-  DateTime _startDate = DateTime.now().subtract(const Duration(days: 7));
+  DateTime _startDate = DateTime.now().subtract(const Duration(days: 6));
   DateTime _endDate = DateTime.now();
 
   @override
