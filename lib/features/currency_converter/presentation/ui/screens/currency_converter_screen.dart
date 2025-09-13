@@ -4,6 +4,7 @@ import 'package:currencyapp/core/utils/enums/enums.dart';
 import 'package:currencyapp/features/currency_converter/presentation/logic/currency_converter_cubit.dart';
 import 'package:currencyapp/features/currency_converter/presentation/ui/widgets/currency_input_card.dart';
 import 'package:currencyapp/features/currency_converter/presentation/ui/widgets/exchange_rate_result.dart';
+import 'package:currencyapp/features/home/presentation/logic/currency_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -20,6 +21,7 @@ class CurrencyConverterScreen extends StatefulWidget {
 
 class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
   late CurrencyConverterCubit cubit;
+  final CurrencyCubit currencyCubit = getIt<CurrencyCubit>();
 
   @override
   void initState() {
@@ -28,11 +30,13 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
     if (widget.currencyId != null) {
       cubit.getCurrencyConverterData(currencyId: widget.currencyId!);
     }
+    currencyCubit.initController();
   }
 
   @override
   void dispose() {
     cubit.clearCubitState();
+    currencyCubit.disposeController();
     super.dispose();
   }
 

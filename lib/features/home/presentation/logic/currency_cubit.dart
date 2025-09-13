@@ -24,14 +24,26 @@ class CurrencyCubit extends Cubit<CurrencyState> {
     required this.getCountriesUseCase,
   }) : super(const _CurrencyState());
 
-  late TextEditingController searchController;
+  int _controllerReferenceCount = 0;
+  late TextEditingController? searchController;
 
-  initController() {
-    searchController = TextEditingController();
+  void initController() {
+    _controllerReferenceCount++;
+    if (_controllerReferenceCount == 1) {
+      searchController = TextEditingController();
+    }
   }
 
-  disposeController() {
-    searchController.dispose();
+  void disposeController() {
+    _controllerReferenceCount--;
+    if (_controllerReferenceCount == 0) {
+      final currentText = searchController?.text ?? '';
+      searchController?.dispose();
+      searchController = null;
+      if (currentText.isNotEmpty) {
+        setSearchQuery('');
+      }
+    }
   }
 
   // Cached search results to avoid recomputation when query and lists are unchanged
@@ -70,9 +82,11 @@ class CurrencyCubit extends Cubit<CurrencyState> {
     emit(state.copyWith(searchQuery: trimmed));
   }
 
-  clearSearchQuery() {
-    searchController.clear();
-    setSearchQuery('');
+  void clearSearchQuery() {
+    if (searchController != null && searchController!.text.isNotEmpty) {
+      searchController?.clear();
+      setSearchQuery('');
+    }
   }
 
   Future<void> getCurrencies() async {

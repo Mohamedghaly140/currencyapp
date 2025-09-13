@@ -14,17 +14,7 @@ class ExchangeRateResult extends StatelessWidget {
       spacing: AppSpacing.xl,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        BlocBuilder<CurrencyConverterCubit, CurrencyConverterState>(
-          buildWhen: (previous, current) =>
-              previous.convertedAmount != current.convertedAmount ||
-              previous.targetCountry != current.targetCountry,
-          builder: (context, state) {
-            return CurrencyResultCard(
-              targetCurrency: state.targetCountry.alpha3 ?? '',
-              convertedAmount: state.convertedAmount,
-            );
-          },
-        ),
+        const CurrencyResultCard(),
 
         BlocBuilder<CurrencyConverterCubit, CurrencyConverterState>(
           buildWhen: (previous, current) =>
