@@ -46,10 +46,9 @@ abstract class RouterGenerator {
         path: NamedRoutes.currencyConverter.routeName,
         name: NamedRoutes.currencyConverter.routeName,
         builder: (context, state) {
-          final currencyId = state.uri.queryParameters['currencyId'];
           return BlocProvider.value(
             value: getIt<CurrencyConverterCubit>(),
-            child: CurrencyConverterScreen(currencyId: currencyId),
+            child: const CurrencyConverterScreen(),
           );
         },
       ),

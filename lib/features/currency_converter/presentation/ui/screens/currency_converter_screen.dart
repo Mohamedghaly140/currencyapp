@@ -10,9 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CurrencyConverterScreen extends StatefulWidget {
-  final String? currencyId;
-
-  const CurrencyConverterScreen({super.key, this.currencyId});
+  const CurrencyConverterScreen({super.key});
 
   @override
   State<CurrencyConverterScreen> createState() =>
@@ -27,9 +25,7 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
   void initState() {
     super.initState();
     cubit = getIt<CurrencyConverterCubit>();
-    if (widget.currencyId != null) {
-      cubit.getCurrencyConverterData(currencyId: widget.currencyId!);
-    }
+    cubit.getCurrencyConverterData();
     currencyCubit.initController();
   }
 

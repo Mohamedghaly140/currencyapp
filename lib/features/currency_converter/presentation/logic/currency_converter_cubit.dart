@@ -25,6 +25,7 @@ class CurrencyConverterCubit extends Cubit<CurrencyConverterState> {
 
   void setTargetCountry(CountryModel country) {
     emit(state.copyWith(targetCountry: country));
+    getCurrencyConverterData();
   }
 
   void setExchangeRate(double exchangeRate) {
@@ -40,13 +41,17 @@ class CurrencyConverterCubit extends Cubit<CurrencyConverterState> {
     );
   }
 
-  Future<void> getCurrencyConverterData({required String currencyId}) async {
+  Future<void> getCurrencyConverterData() async {
+    if (state.sourceCountry == null) {
+      return;
+    }
+
     emit(
       state.copyWith(getCurrencyConverterRequestState: RequestState.loading),
     );
 
     final params = RequestCurrencyConverterDataParams(
-      sourceCurrencyId: currencyId,
+      sourceCurrencyId: state.sourceCountry?.currencyId ?? '',
       targetCurrencyId: state.targetCountry.currencyId ?? '',
     );
 
