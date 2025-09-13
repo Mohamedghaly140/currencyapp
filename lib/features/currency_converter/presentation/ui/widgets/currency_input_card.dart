@@ -69,11 +69,9 @@ class CurrencyInputCard extends StatelessWidget {
                     ),
               ),
               onChanged: (value) {
-                if (value.isNotEmpty) {
-                  getIt<CurrencyConverterCubit>().setEnteredAmount(
-                    double.tryParse(value) ?? 0.0,
-                  );
-                }
+                getIt<CurrencyConverterCubit>().setEnteredAmount(
+                  double.tryParse(value) ?? 0.0,
+                );
               },
             ),
           ],
