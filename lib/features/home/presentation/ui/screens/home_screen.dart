@@ -1,4 +1,5 @@
 import 'package:currencyapp/core/dependency_injection/injection.dart';
+import 'package:currencyapp/core/resources/sys_overlay_style.dart';
 import 'package:currencyapp/features/home/presentation/logic/currency_cubit.dart';
 import 'package:currencyapp/features/home/presentation/ui/widgets/currencies/currencies.dart';
 import 'package:currencyapp/features/home/presentation/ui/widgets/search_text_field.dart';
@@ -31,7 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Currency App')),
+      appBar: AppBar(
+        elevation: 0.0,
+        scrolledUnderElevation: 0.0,
+        title: Text('Currency App'),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        systemOverlayStyle: SysOverlayStyle.appSystemStyle(),
+      ),
       body: Column(children: [SearchTextField(), Currencies()]),
     );
   }
