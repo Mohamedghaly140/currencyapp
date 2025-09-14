@@ -22,16 +22,17 @@ The app follows **Clean Architecture** principles combined with a **feature-firs
 
 ```
 lib/
-├── core/                    # Shared utilities and configurations
-│   ├── config/             # App configuration and environment setup
-│   ├── database/           # Database configuration (Drift)
+├── core/                     # Shared utilities and configurations
+│   ├── config/               # App configuration and environment setup
+│   ├── database/             # Database configuration (Drift)
 │   ├── dependency_injection/ # GetIt + Injectable setup
-│   ├── networking/         # API clients, error handling, interceptors
-│   ├── navigation/         # GoRouter configuration
-│   └── resources/          # Themes, styles, constants
-├── features/               # Feature modules
-│   ├── home/              # Currency listing feature
-│   └── historical_data/   # Historical data analysis feature
+│   ├── networking/           # API clients, error handling, interceptors
+│   ├── navigation/           # GoRouter configuration
+│   └── resources/            # Themes, styles, constants
+├── features/                 # Feature modules
+│   ├── home/                 # Currency listing feature
+│   ├── historical_data/      # Historical data analysis feature
+│   └── currency_converter/   # Currency Converter feature
 └── main.dart
 ```
 
