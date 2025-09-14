@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -40,7 +41,8 @@ class CustomCachedImage extends StatelessWidget {
         height: height,
         fit: fit,
         allowDrawingOutsideViewBox: true,
-        placeholderBuilder: (BuildContext context) => _buildPlaceholder(),
+        placeholderBuilder: (BuildContext context) =>
+            _buildLoadingPlaceholder(),
         errorBuilder:
             (BuildContext context, Object exception, StackTrace? stackTrace) {
               // If SVG parsing fails, show placeholder
@@ -61,7 +63,7 @@ class CustomCachedImage extends StatelessWidget {
             image: DecorationImage(image: imageProvider, fit: fit),
           ),
         ),
-        placeholder: (context, url) => _buildPlaceholder(),
+        placeholder: (context, url) => _buildLoadingPlaceholder(),
         errorWidget: (context, url, error) => _buildPlaceholder(),
       );
     }
@@ -78,6 +80,18 @@ class CustomCachedImage extends StatelessWidget {
       child: const Center(
         child: Icon(Icons.image_not_supported, color: Color(0xFF808080)),
       ),
+    );
+  }
+
+  Widget _buildLoadingPlaceholder() {
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        shape: shape,
+        color: const Color(0xFFF2F4F7), // Light gray background
+      ),
+      child: const Center(child: CupertinoActivityIndicator()),
     );
   }
 }
